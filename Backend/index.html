@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Agregar producto</title>
+  </head>
+  <body>
+    <h1>Agregar producto</h1>
+    <form id="addProductForm">
+      <div>
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div>
+        <label for="description">Descripción:</label>
+        <textarea id="description" name="description" required></textarea>
+      </div>
+      <div>
+        <label for="price">Precio:</label>
+        <input type="number" id="price" name="price" step="0.01" required>
+      </div>
+      <div>
+        <label for="category">Categoría:</label>
+        <select id="category" name="category" required>
+          <option value="">--Seleccionar--</option>
+          <option value="Hombre">Hombre</option>
+          <option value="Mujer">Mujer</option>
+          <option value="Niño">Niño</option>
+          <option value="Niña">Niña</option>
+        </select>
+      </div>
+      <div>
+        <label for="brand">Marca:</label>
+        <input type="text" id="brand" name="brand" required>
+      </div>
+      <div>
+        <label for="url">url:</label>
+        <input type="text" id="url" name="url" required>
+      </div>
+      <div>
+        <label for="quantity">Cantidad:</label>
+        <input type="number" id="quantity" name="quantity" required>
+      </div>
+      <div>
+        <button type="submit">Agregar</button>
+      </div>
+    </form>
+
+    <script>
+      const form = document.querySelector('#addProductForm');
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const name = form.name.value;
+        const description = form.description.value;
+        const price = form.price.value;
+        const category = form.category.value;
+        const brand = form.brand.value;
+        const quantity = form.quantity.value;
+        const url = form.url.value
+
+        fetch('/admin/addProductos', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ name, description, price, category, brand, url, quantity })
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          alert('Producto agregado exitosamente');
+        })
+        .catch(error => {
+          console.error(error);
+          alert('Error al agregar producto');
+        });
+      });
+    </script>
+  </body>
+</html>
