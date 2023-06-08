@@ -5,7 +5,7 @@ function Perfil () {
   const { user, setUser } = useContext(AppContext);
   return(
     <div>
-      Hola
+      {user.username}
     </div>
   )
 }
