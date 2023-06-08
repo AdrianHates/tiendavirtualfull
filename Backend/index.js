@@ -41,7 +41,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-//app.use(express.static(path.join(__dirname, '../Frontend/build')));
+app.use(express.static(path.join(__dirname, '../Frontend/build')));
 
 //Usando rutas
 app.use('/api/users', userRoutes);
@@ -49,8 +49,6 @@ app.use('/api/user', authRouter);
 app.use('/api/get', getRouter);
 app.use('/admin', adminRouter);
 app.use('/api/addtocart', cartRouter);
-
-app.use(express.static(path.join(__dirname, '../Frontend/build')));
 
 app.listen(5000, () => {
   console.log(`Servidor iniciado en puerto 5000`);
