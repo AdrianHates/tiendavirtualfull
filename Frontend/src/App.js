@@ -50,7 +50,7 @@ function App() {
   }
 
   useEffect(() => {
-      fetch('/api/get/products')
+      fetch('http://localhost:5000/api/get/products')
       .then(res => res.json())
       .then(data => setProducts(data))
       .catch(error => console.error(error));
