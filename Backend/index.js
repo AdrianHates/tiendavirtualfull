@@ -50,6 +50,8 @@ app.use('/api/get', getRouter);
 app.use('/admin', adminRouter);
 app.use('/api/addtocart', cartRouter);
 
+app.use(express.static(path.join(__dirname, '../Frontend/build')));
+
 app.listen(5000, () => {
   console.log(`Servidor iniciado en puerto 5000`);
 });
