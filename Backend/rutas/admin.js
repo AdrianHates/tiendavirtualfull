@@ -15,7 +15,7 @@ router.post('/addProductos', (req, res) => {
     });
 });
 
-router.get('/addProductos', checkAdmin, (req, res) => {
+router.get('/addProductos'/*, checkAdmin*/, (req, res) => {
   res.sendFile(path.join(__dirname, '../index.html'));
 })
 
