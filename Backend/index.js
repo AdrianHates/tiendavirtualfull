@@ -5,7 +5,6 @@ const path = require('path');
 const session = require('express-session');
 const passport = require('passport')
 const config = require("./configuracion/auth")
-const PORT = process.env.PORT || 5000
 //rutas importadas
 const userRoutes = require('./rutas/user')
 const getRouter = require('./rutas/get')
@@ -52,5 +51,5 @@ app.use('/admin', adminRouter);
 app.use('/api/addtocart', cartRouter);
 
 app.listen(5000, () => {
-  console.log(`Servidor iniciado en puerto ${PORT}`);
+  console.log(`Servidor iniciado en puerto 5000`);
 });

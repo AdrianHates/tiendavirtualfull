@@ -5,7 +5,7 @@ const app = express();
 // todos los productos
 router.get('/products', async (req, res) => {
   try {
-    const productos = await Product.find(); 
+    const productos = await Product.find().maxTimeMS(30000); 
     res.status(200).json(productos); 
   } catch (error) {
     res.status(500).json({ message: error.message }); 
