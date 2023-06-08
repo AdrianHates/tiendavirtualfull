@@ -41,6 +41,8 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+database.on('error', console.error.bind(console, 'MongoDB connection error:'))
+
 app.use(express.static(path.join(__dirname, '../Frontend/build')));
 
 //Usando rutas
