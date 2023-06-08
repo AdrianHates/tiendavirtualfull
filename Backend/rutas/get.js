@@ -8,7 +8,7 @@ router.get('/products', async (req, res) => {
     const productos = await Product.find().maxTimeMS(15000); 
     res.status(200).json(productos); 
   } catch (error) {
-    res.status(500).json({ message: error.message }); 
+    res.status(500).json({ message: "el error viene de aqui?"}); 
   }
 });
 
