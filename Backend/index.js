@@ -41,7 +41,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(express.static(path.join(__dirname, '../Frontend/build')));
+//app.use(express.static(path.join(__dirname, '../Frontend/build')));
 
 //Usando rutas
 app.use('/api/users', userRoutes);
