@@ -1,7 +1,7 @@
-const express = require('express');
-const Product = require('../esquemas/products'); // Importa el modelo de productos
+import express from 'express'
+import Product from '../esquemas/products.js' // Importa el modelo de productos
 const router = express.Router();
-const app = express();
+
 // todos los productos
 router.get('/products', async (req, res) => {
   try {
@@ -12,4 +12,4 @@ router.get('/products', async (req, res) => {
   }
 });
 
-module.exports = router
+export default router

@@ -1,7 +1,7 @@
-const express = require("express")
-const router = express.Router();
-const Product = require("../esquemas/products")
-const path = require("path")
+import express from 'express'
+const router = express.Router()
+import Product from "../esquemas/products.js"
+import path from "path"
 
 router.post('/addProductos', (req, res) => {
   const { name, description, price, category, brand, url, stock } = req.body;
@@ -27,4 +27,4 @@ function checkAdmin(req, res, next) {
   }
 }
 
-module.exports = router;
+export default router;

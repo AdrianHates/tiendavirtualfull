@@ -1,6 +1,6 @@
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const User = require('../esquemas/User')
+import passport from 'passport';
+import { Strategy as LocalStrategy } from 'passport-local'
+import User from '../esquemas/User.js'
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -53,3 +53,5 @@ passport.use('local-signin', new LocalStrategy({
     }
   return done(null, user);
 }));
+
+export default passport

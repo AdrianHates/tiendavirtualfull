@@ -1,16 +1,21 @@
-const mongoose = require('mongoose');
-const cartSchema = require('./cart');
-const bcrypt = require('bcrypt');
+import mongoose from 'mongoose';
+import cartSchema from './cart.js';
+import bcrypt from 'bcrypt'
 
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
+    trim: true,
+    required: true
   },
   email: {
     type: String,
+    required: true,
+    trim: true
   },
   password: {
     type: String,
+    required: true
   },
   rol: {
     type: String,
@@ -27,6 +32,8 @@ const userSchema = new mongoose.Schema({
   genero: String,
   birth: Date,
   phone: String
+}, {
+  timestamps: true
 });
 
 userSchema.pre('save', async function(next) {
@@ -64,4 +71,4 @@ userSchema.methods.isValidPassword = async function(password) {
 
 
 
-module.exports = mongoose.model('User', userSchema);
+export default mongoose.model('User', userSchema);

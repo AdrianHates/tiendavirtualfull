@@ -1,7 +1,7 @@
-const express = require('express');
-const passport = require('passport');
+import express from 'express'
+import passport from 'passport';
 const router = express.Router();
-const User = require('../esquemas/User')
+import User from '../esquemas/User.js'
 
 router.post('/login', (req, res, next) => {
   passport.authenticate('local-signin', (err, user, info) => {
@@ -77,4 +77,4 @@ function isAuthenticated(req, res, next) {
 }
 
 
-module.exports = router;
+export default router;

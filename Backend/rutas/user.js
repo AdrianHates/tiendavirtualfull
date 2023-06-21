@@ -1,7 +1,7 @@
-const express = require("express")
+import express from 'express'
 const router = express.Router();
-const passport = require("passport")
-const path = require("path")
+import passport from 'passport';
+import path from 'path';
 
 // Ruta para registrar un nuevo usuario
 router.post('/oculto/register', (req, res, next)=>{
@@ -20,4 +20,4 @@ router.get('/register', (req, res) => {
   res.sendFile(path.join(__dirname, '../my-app/build/index.html'));
 });
 
-module.exports = router;
+export default router;

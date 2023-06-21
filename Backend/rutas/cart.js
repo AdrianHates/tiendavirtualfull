@@ -1,7 +1,7 @@
-const express = require('express');
-const Product = require('../esquemas/products')
-const Cart = require('../esquemas/cart')
-const User = require('../esquemas/User')
+import express from 'express'
+import  Product from '../esquemas/products.js'
+import Cart from '../esquemas/cart.js'
+import User from '../esquemas/User.js'
 const router = express.Router();
 
 router.post('/', async (req, res) => {
@@ -50,4 +50,4 @@ router.post('/', async (req, res) => {
     res.status(500).json({ message: errorMessage });
   }})
 
-module.exports = router
+export default router

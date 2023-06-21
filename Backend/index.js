@@ -1,19 +1,29 @@
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const path = require('path');
-const session = require('express-session');
-const passport = require('passport')
-const config = require("./configuracion/auth")
+import express from 'express'
+import morgan from "morgan"
+import cors from 'cors'
+import path from 'path'
+import session from 'express-session'
+import passport from "./configuracion/auth.js"
+import { database } from './database.js'
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 //rutas importadas
-const userRoutes = require('./rutas/user')
-const getRouter = require('./rutas/get')
-const authRouter = require('./rutas/auth')
-const adminRouter = require('./rutas/admin')
-const cartRouter = require('./rutas/cart')
-//iniciación
+import userRoutes from './rutas/user.js'
+import getRouter from'./rutas/get.js'
+import authRouter from'./rutas/auth.js'
+import adminRouter from'./rutas/admin.js'
+import cartRouter from'./rutas/cart.js'
+
+//iniciación - configurando
 const app = express();
-const database = require('./database')
+app.use(morgan("dev"))
+app.use(express.json())
+app.use(cors());
+database()
 
 //config paypal
 /*const paypal = require('paypal-rest-sdk');
@@ -27,21 +37,14 @@ paypal.configure({
 
 app.use(session({
   secret: process.env.SECRET,
-  resave: false,
-  saveUninitialized: false
+  resave: true,
+  saveUninitialized: true
 }));
 
 //config auth
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-// config de express
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-database.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 app.use(express.static(path.join(__dirname, '../Frontend/build')));
 
