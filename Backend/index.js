@@ -4,6 +4,7 @@ import cors from 'cors'
 import path from 'path'
 import session from 'express-session'
 import passport from "./configuracion/auth.js"
+import cookieParser from 'cookie-parser'
 import { database } from './database.js'
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -34,11 +35,15 @@ paypal.configure({
 });
 */
 //config session
-
+app.use(cookieParser());
 app.use(session({
   secret: process.env.SECRET,
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: false,
+  cookie: {
+    secure: true, // Si estás utilizando HTTPS
+    maxAge: 3600000, // Tiempo de vida de la cookie en milisegundos
+  },
 }));
 
 //config auth
