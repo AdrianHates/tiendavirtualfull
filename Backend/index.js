@@ -39,10 +39,10 @@ app.use(session({
   secret: process.env.SECRET,
   resave: true,
   saveUninitialized: false,
-  //cookie: {
-    //secure: true, // Si estás utilizando HTTPS
-    //maxAge: 3600000, // Tiempo de vida de la cookie en milisegundos
-  //},
+  cookie: {
+    secure: true, // Si estás utilizando HTTPS
+    maxAge: 3600000, // Tiempo de vida de la cookie en milisegundos
+  },
 }));
 
 //config auth
