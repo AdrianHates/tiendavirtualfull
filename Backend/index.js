@@ -3,7 +3,7 @@ import morgan from "morgan"
 import cors from 'cors'
 import path from 'path'
 import session from 'express-session'
-import passport from "./configuracion/auth.js"
+import passport from './configuracion/auth.js';
 import cookieParser from 'cookie-parser'
 import { database } from './database.js'
 import { fileURLToPath } from 'url';
@@ -25,7 +25,6 @@ app.use(morgan("dev"))
 app.use(express.json())
 app.use(cors());
 database()
-
 //config paypal
 /*const paypal = require('paypal-rest-sdk');
 paypal.configure({
@@ -35,15 +34,15 @@ paypal.configure({
 });
 */
 //config session
-app.use(cookieParser());
+app.use(cookieParser())
 app.use(session({
   secret: process.env.SECRET,
   resave: true,
   saveUninitialized: false,
-  cookie: {
-    secure: true, // Si estás utilizando HTTPS
-    maxAge: 3600000, // Tiempo de vida de la cookie en milisegundos
-  },
+  //cookie: {
+    //secure: true, // Si estás utilizando HTTPS
+    //maxAge: 3600000, // Tiempo de vida de la cookie en milisegundos
+  //},
 }));
 
 //config auth
