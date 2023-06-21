@@ -27,7 +27,7 @@ function SignUpForm() {
     const newUser = { username, email, password };
 
     try {
-      const response = await fetch('http://localhost:5000/api/users/oculto/register', {
+      const response = await fetch('/api/users/oculto/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
