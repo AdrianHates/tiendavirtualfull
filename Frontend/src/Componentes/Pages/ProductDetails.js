@@ -1,17 +1,19 @@
 import React, { useContext, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { AppContext } from '../../App';
+import { promo, devoluciones } from '../Componentes/Variables';
+import { backendURL } from '../Componentes/Variables';
 
 function ProductDetails() {
   const { products, setUser, user } = useContext(AppContext);
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
 
-  const product = products.find(product => product._id === id);
+  const product = products&&products.find(product => product._id === id)
 
   const handleAddToCart = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/addtocart', {
+      const response = await fetch(`${backendURL}/api/addtocart`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -34,16 +36,41 @@ function ProductDetails() {
   };
 
   return (
-    <div>
-      <h2>{product.name}</h2>
+    <>
+    {product&&<>
+    <div className='detalles'>
+      <div>
       <img src={product.url} alt={product.name} />
-      <p>{product.description}</p>
-      <p>Precio: {`${product.price}0`}</p>
+      </div>
+      <div>
+      <h4>{product.marca}</h4>
+      <h4>{product.name}</h4>
+      <p><span>Precio:</span><span>{`S/ ${product.price.toFixed(2)}`}</span></p>
       <p>Stock: {product.stock}</p>
+      <img src={promo} alt='promo' />
       <label>Cantidad:</label>
-      <input type="number" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
+      <div>
+      <input type="number" min="1" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
       <button onClick={handleAddToCart}>Agregar al carrito</button>
+      </div>
+      <NavLink to='/cambios-y-devoluciones'>
+      <img src= {devoluciones} alt='devoluciones' />
+      </NavLink>
+      </div>
     </div>
+    <div className='descripcion-productos-detalles'>
+      <div>
+        <h5>Descripcion</h5>
+        <p>{product.description}</p>
+      </div>
+      <div>
+        <h5>Caracteristicas</h5>
+        <p>xdxdxdxdxd</p>
+      </div>
+    </div>
+    </>
+    }
+    </>
   );
 }
 

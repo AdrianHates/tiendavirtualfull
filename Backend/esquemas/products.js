@@ -19,7 +19,7 @@ const productSchema = new mongoose.Schema({
     enum: ['Hombre', 'Mujer', 'Niño', 'Niña'],
     required: true
   },
-  brand: {
+  marca: {
     type: String,
     required: true
   },

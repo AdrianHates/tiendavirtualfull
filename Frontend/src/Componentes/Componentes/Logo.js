@@ -1,10 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-function Logo () {
+function Logo ({tienda}) {
   return (
-    <NavLink exact={'true'} to="/">
-      <img src='' alt='LogoShop' />
+    <NavLink exact={'true'} to='/'>
+    
+      <img src='' alt={tienda} />
+    
     </NavLink>
   )
 }

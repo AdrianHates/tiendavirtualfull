@@ -30,16 +30,16 @@
         </select>
       </div>
       <div>
-        <label for="brand">Marca:</label>
-        <input type="text" id="brand" name="brand" required>
+        <label for="marca">Marca:</label>
+        <input type="text" id="marca" name="marca" required>
       </div>
       <div>
         <label for="url">url:</label>
         <input type="text" id="url" name="url" required>
       </div>
       <div>
-        <label for="quantity">Cantidad:</label>
-        <input type="number" id="quantity" name="quantity" required>
+        <label for="stock">Stock:</label>
+        <input type="number" id="stock" name="stock" required>
       </div>
       <div>
         <button type="submit">Agregar</button>
@@ -50,14 +50,13 @@
       const form = document.querySelector('#addProductForm');
 
       form.addEventListener('submit', (event) => {
-        event.preventDefault();
-
+        event.preventDefault()
         const name = form.name.value;
         const description = form.description.value;
         const price = form.price.value;
         const category = form.category.value;
-        const brand = form.brand.value;
-        const quantity = form.quantity.value;
+        const marca = form.marca.value;
+        const stock = form.stock.value;
         const url = form.url.value
 
         fetch('/admin/addProductos', {
@@ -65,7 +64,7 @@
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ name, description, price, category, brand, url, quantity })
+          body: JSON.stringify({ name, description, price, category, marca, url, stock })
         })
         .then(response => response.json())
         .then(data => {

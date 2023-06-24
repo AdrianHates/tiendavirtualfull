@@ -2,10 +2,15 @@ import express from 'express'
 const router = express.Router()
 import Product from "../esquemas/products.js"
 import path from "path"
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 router.post('/addProductos', (req, res) => {
-  const { name, description, price, category, brand, url, stock } = req.body;
-  const newProduct = new Product({ name, description, price, category, brand, url, stock });
+  const { name, description, price, category, marca, url, stock } = req.body;
+  const newProduct = new Product({ name, description, price, category, marca, url, stock });
   newProduct.save()
     .then(product => {
       res.send(product);

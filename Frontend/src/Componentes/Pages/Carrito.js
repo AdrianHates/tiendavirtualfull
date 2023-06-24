@@ -31,6 +31,7 @@ function Carrito() {
   const [codigoSeguridad, setCodigoSeguridad] = useState('');
   const [mostrarModal, setMostrarModal] = useState(false);
   
+  
   // Calcular el total del carrito
   const total = user?user.carts.items.reduce((acc, item) => {
     return acc + item.quantity * item.product.price;
@@ -76,7 +77,7 @@ function Carrito() {
 
   const handleRemoveFromCart = async (itemId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/removefromcart/${itemId}`, {
+      const response = await fetch(`/api/removefromcart/${itemId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -96,7 +97,7 @@ function Carrito() {
       alert('Ocurrió un error al intentar eliminar del carrito');
     }
   };
-
+console.log(user)
   return (    
     <div id='carrito'>
       <div id='encabezadoCarrito'>
@@ -104,7 +105,7 @@ function Carrito() {
           <Logo />
         </div>
         <div>
-          <h1>Carrito de Compra</h1>
+          <h5>Carrito de Compra</h5>
         </div>
         <div id='regresarComprar'>
           <NavLink to='/'>
@@ -128,18 +129,20 @@ function Carrito() {
           {user.carts.items.map((item) => (
           <tr className='productoCarrito' key={item._id}>
             <td>
-            <img className='imagenProductoCarrito' src={item.product.url} alt ={item._id} />
-            <p>{item.product.name}</p>
-            <p style={{fontWeight:100}}>{item.product.brand}</p>
+              <NavLink to={`/productos/${item.product._id}`}>
+                <img className='imagenProductoCarrito' src={item.product.url} alt ={item._id} />
+                <p>{item.product.name}</p>
+              </NavLink>
+            <p>{item.product.brand}</p>
             </td>
             <td>
-            <p className='precioProductoCarrito'>{item.product.price}</p>
+            <p className='precioProductoCarrito'>{`S/ ${item.product.price.toFixed(2)}`}</p>
             </td>
             <td>
             <p className='cantidadProductoCarrito'>{item.quantity}</p>
             </td>
             <td>
-            <p className='precioProductoCarrito'>{(item.quantity * item.product.price).toFixed(2)}</p>
+            <p className='precioProductoCarrito'>{`S/ ${(item.quantity * item.product.price).toFixed(2)}`}</p>
             <button onClick={() => handleRemoveFromCart(item._id)}>Eliminar</button>
             </td>
           </tr>
@@ -199,10 +202,10 @@ function Carrito() {
     )}
     {user?
     <div id='resumenCompra'>
-      <p id='resumenTitulo'>Resumen de Compra</p>
+      <p id='resumenTitulo'>Resumen de compra</p>
       <div id='total'>
         <p>Total</p>
-        <p id='totalCompra'>{total}</p>
+        <p id='totalCompra'>{`S/ ${total.toFixed(2)}`}</p>
       </div>
       <button className='buttonCarrito' onClick={handleBuy}>Ir a comprar</button>
     </div>:null}

@@ -14,7 +14,7 @@ function Contacto() {
   return(
     <div id='contactoContenedor'>
       <div id='contacto'>
-        <h3>Contacto</h3>
+        <h4>Contacto</h4>
         <div className='contacto1'>
           <div className='contactoDiv'>
             <MdPlace />

@@ -1,15 +1,25 @@
 import './App.css';
 import React, { useState, useEffect, createContext } from 'react';
 import { NavLink, Routes, Route, useLocation } from 'react-router-dom';
-import { HomePage } from './Componentes/Pages/HomePage';
+//pages
+import HomePage from './Componentes/Pages/HomePage';
 import RegisterPage from './Componentes/Pages/RegisterPage';
 import Carrito from './Componentes/Pages/Carrito';
-import Login from './Componentes/Componentes/Login'
-import Perfil from './Componentes/Pages/Perfil'
 import Category from './Componentes/Pages/Category'
 import ProductDetails from './Componentes/Pages/ProductDetails';
+import Nosotros from './Componentes/Pages/Nosotros';
+import Perfil from './Componentes/Pages/Perfil'
+import Devoluciones from './Componentes/Pages/Devoluciones';
+//componentes
+import Login from './Componentes/Componentes/Login'
+import Contacto from './Componentes/Componentes/Contacto';
 import Logo from './Componentes/Componentes/Logo';
+import Informacion from './Componentes/Componentes/Informacion';
+//icons
 import { HiUserCircle, HiOutlineShoppingBag } from 'react-icons/hi';
+
+//datos
+import { tienda, backendURL } from './Componentes/Componentes/Variables'
 export const AppContext = createContext(); 
 
 function App() {
@@ -19,9 +29,11 @@ function App() {
   const [opcionSeleccionada, setOpcionSeleccionada] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [mostrar, setMostrar] = useState(false);
+
   const location = useLocation();
   const isCarritoPage = location.pathname === '/carrito'
-  console.log(products)
+  
+  
   const resetAll = () => {
     setOpcionSeleccionada([]);
     if(document.querySelectorAll('input[type="checkbox"]')) {
@@ -31,7 +43,6 @@ function App() {
     });
     }
   }
-
   
   const handleShowModal = () => {
     setShowModal(true);
@@ -50,12 +61,12 @@ function App() {
   }
 
   useEffect(() => {
-      fetch('/api/get/products')
+      fetch(`${backendURL}/api/get/products`)
       .then(res => res.json())
       .then(data => setProducts(data))
       .catch(error => console.error(error));
     
-      fetch('/api/user/usuarioLog')
+      fetch(`${backendURL}/api/user/usuarioLog`)
       .then(res => {
         if (!res.ok) {
           throw new Error('');
@@ -83,7 +94,7 @@ function App() {
         <nav id='nav'>
           <ul>
             <li>
-              <Logo />
+              <Logo tienda={tienda} />
             </li>
             <li>
               <ul style={{display: 'Flex', gap: '1rem', listStyleType: 'none'}}>
@@ -114,7 +125,7 @@ function App() {
                 <NavLink to='/api/user/perfil'>
                   <div>                  
                   <HiUserCircle className='iconMiCuenta' />
-                  <div>Mi cuenta</div>
+                  <div>Mi perfil</div>
                   </div>
                 </NavLink> :
               <li id='miCuenta' onClick={metodoMostrar}>
@@ -135,7 +146,7 @@ function App() {
                 <div style={{position:'relative', display: 'flex', flexDirection:'column',alignItems:'center'}}>                  
                   <HiOutlineShoppingBag className='iconMiCuenta' />
                   {/*corregir position, translate */}
-                  <div style={{position: 'absolute', top: '7.5px', left:'20px', color:'red'}}>{cantidadCarrito}</div>
+                  <div style={{position: 'absolute', top: '0.5rem', left:'0', color:'red', width:'100%', fontWeight: '500', textAlign: 'center'}}>{cantidadCarrito}</div>
                   <div>Carrito</div>
                 </div>
                 </NavLink>
@@ -152,6 +163,8 @@ function App() {
           <Route exact path="/carrito" element={<Carrito />} />
           <Route exact path="/api/user/perfil" element={<Perfil />} />
           <Route exact path="/productos/:id" element={<ProductDetails />} />
+          <Route exact path="/informacion/nosotros" element={<Nosotros tienda={tienda} />} />
+          <Route exact path="/cambios-y-devoluciones" element={<Devoluciones />} />
         </Routes>
         {showModal && (
                   <div className="modelo">
@@ -159,10 +172,16 @@ function App() {
                       <span className="close" onClick={handleCloseModal}>
                         Cerrar &times;
                       </span>
-                      <Login />
+                      <Login backendURL={backendURL}/>
                     </div>
                   </div>
-        )}           
+        )}
+        
+        <Informacion tienda={tienda} />
+        <div className='divHr'>
+        <hr className='hr'/>
+        </div>
+        <Contacto />           
         <footer>
           Example 2023 © Todos los derechos reservados
         </footer>    

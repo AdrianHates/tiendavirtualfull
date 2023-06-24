@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../../App';
 
-function Login() {
+function Login( { backendURL } ) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('/api/user/login', {
+      const response = await fetch(`${backendURL}/api/user/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
