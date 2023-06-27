@@ -39,9 +39,9 @@ app.use(session({
   secret: process.env.SECRET,
   resave: true,
   saveUninitialized: false,
-  //cookie: {
-    //secure: true, // Si estás utilizando HTTPS
-    //maxAge: 3600000, // Tiempo de vida de la cookie en milisegundos
+    //cookie: {      
+       // Si estás utilizando HTTPS
+     // maxAge: 3600000, // Tiempo de vida de la cookie en milisegundos
   //},
 }));
 
@@ -50,7 +50,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(express.static(path.join(__dirname, '../Frontend/build')));
+
+app.use(express.static(path.join(__dirname, '../Frontend/build/')));
 
 //Usando rutas
 app.use('/api/users', userRoutes);
@@ -58,6 +59,10 @@ app.use('/api/user', authRouter);
 app.use('/api/get', getRouter);
 app.use('/admin', adminRouter);
 app.use('/api/addtocart', cartRouter);
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../Frontend/build/index.html'));
+})
+
 
 app.listen(5000, () => {
   console.log(`Servidor iniciado en puerto 5000`);

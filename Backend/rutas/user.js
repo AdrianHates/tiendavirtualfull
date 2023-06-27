@@ -17,7 +17,7 @@ router.post('/oculto/register', (req, res, next)=>{
 }); 
 
 router.get('/register', (req, res) => {
-  res.sendFile(path.join(__dirname, '../my-app/build/index.html'));
+  res.sendFile(path.join(__dirname, '../Frontend/build/index.html'));
 });
 
 export default router;

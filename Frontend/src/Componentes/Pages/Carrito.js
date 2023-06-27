@@ -6,7 +6,7 @@ import SecuenciaCompra from "../Componentes/SecuenciaCompra";
 import Logo from '../Componentes/Logo';
 import { HiArrowLongLeft } from 'react-icons/hi2'
 
-const Inicial = () => {
+function Inicial () {
   return(
     <div>      
       <div id='carritoVacio'>
