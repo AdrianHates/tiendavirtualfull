@@ -25,14 +25,20 @@ export default function Selector() {
 
   return (
     <div className='selector'>
+     
       {opciones.map(x=><div key={x.categoria} className={displaySelector?'openSelector':'closeSelector'}>
-        <div><div>{x.categoria.toUpperCase()}</div><SlArrowDown onClick={abrirSelector} /></div>
-      {x.opciones.map(y=>(
-        <div className='opcion-selector' key={y}>
-          <input type='checkbox' id={y} name={x.categoria} value={y} onChange={cambioInput} />
-          <label htmlFor={y}>{y}</label>
+        <div className='flechaBajo'>
+          <div>{x.categoria.toUpperCase()}</div>
+          <SlArrowDown onClick={abrirSelector} />
         </div>
-      ))}      
+        
+        {x.opciones.map(y=>(
+          <div className='opcion-selector' key={y}>
+            <input type='checkbox' id={y} name={x.categoria} value={y} onChange={cambioInput} />
+            <label htmlFor={y}>{y}</label>
+          </div>
+        ))}
+            
       </div>)}      
     </div>)
 }

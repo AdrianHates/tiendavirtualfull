@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState, useEffect, createContext } from 'react';
-import { NavLink, Routes, Route, useLocation } from 'react-router-dom';
+import { NavLink, Routes, Route, useLocation, json } from 'react-router-dom';
 //pages
 import HomePage from './Componentes/Pages/HomePage';
 import RegisterPage from './Componentes/Pages/RegisterPage';
@@ -22,6 +22,7 @@ import { HiUserCircle, HiOutlineShoppingBag } from 'react-icons/hi';
 import { tienda, backendURL } from './Componentes/Componentes/Variables'
 export const AppContext = createContext(); 
 
+
 function App() {
   const [user, setUser] = useState(null);
   const [products, setProducts] = useState(null);
@@ -32,7 +33,6 @@ function App() {
 
   const location = useLocation();
   const isCarritoPage = location.pathname === '/carrito'
-  
   
   const resetAll = () => {
     setOpcionSeleccionada([]);
@@ -99,22 +99,30 @@ function App() {
             <li>
               <ul style={{display: 'Flex', gap: '1rem', listStyleType: 'none'}}>
                 <li>
-                <NavLink to="/productos/mujer" onClick={resetAll}>
+                <NavLink to="/productos/mujer" className={({isActive})=>{
+                  return isActive ? 'is-active' : undefined
+                }} onClick={resetAll}>
                   Mujer
                 </NavLink>
                 </li>
                 <li>
-                <NavLink to="/productos/hombre" onClick={resetAll}>
+                <NavLink to="/productos/hombre" className={({isActive})=>{
+                  return isActive ? 'is-active' : undefined
+                }} onClick={resetAll}>
                   Hombre
                 </NavLink>
                 </li>
                 <li>
-                <NavLink to="/productos/niños" onClick={resetAll}>
+                <NavLink to="/productos/niños" className={({isActive})=>{
+                  return isActive ? 'is-active' : undefined
+                }} onClick={resetAll}>
                   Niños
                 </NavLink>
                 </li>
                 <li>
-                <NavLink to="/productos/marcas" onClick={resetAll}>
+                <NavLink to="/productos/marcas" className={({isActive})=>{
+                  return isActive ? 'is-active' : undefined
+                }} onClick={resetAll}>
                   Marcas
                 </NavLink>
                 </li>
@@ -155,16 +163,16 @@ function App() {
           </ul>
         </nav>)}
         <Routes>
-          <Route exact path="/" element={<HomePage />} />
-          <Route exact path="/productos/hombre" element={<Category category='Hombre' />} />
-          <Route exact path="/productos/mujer" element={<Category category='Mujer' />} />
-          <Route exact path="/productos/niños" element={<Category category='Niños' />} />
-          <Route exact path="/api/users/register" element={<RegisterPage />} />
-          <Route exact path="/carrito" element={<Carrito />} />
-          <Route exact path="/api/user/perfil" element={<Perfil />} />
-          <Route exact path="/productos/:id" element={<ProductDetails />} />
-          <Route exact path="/informacion/nosotros" element={<Nosotros tienda={tienda} />} />
-          <Route exact path="/cambios-y-devoluciones" element={<Devoluciones />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/productos/hombre" element={<Category category='Hombre' />} />
+          <Route path="/productos/mujer" element={<Category category='Mujer' />} />
+          <Route path="/productos/niños" element={<Category category='Niños' />} />
+          <Route path="/api/users/register" element={<RegisterPage />} />
+          <Route path="/carrito" element={<Carrito />} />
+          <Route path="/api/user/perfil" element={<Perfil />} />
+          <Route path="/productos/:id" element={<ProductDetails />} />
+          <Route path="/informacion/nosotros" element={<Nosotros tienda={tienda} />} />
+          <Route path="/cambios-y-devoluciones" element={<Devoluciones />} />
         </Routes>
         {showModal && (
                   <div className="modelo">

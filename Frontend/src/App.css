@@ -78,6 +78,11 @@ a {
   width: 100%;
 }
 
+.is-active {
+  font-weight: bold;
+  pointer-events: none;
+}
+
 /*Carrusel*/
 
 .w-100 {
@@ -592,29 +597,34 @@ footer {
   .selector {
     padding: .5rem 0;
     border-bottom: 1px solid var(--c-gris-1);
-    & > div {
+    &>div {
       display: flex;
-      flex-direction: column;
-      gap: .3rem;
-      & > div:first-of-type {
-        display: flex;
-        justify-content: space-between;
-        font-weight: 500;      
-        align-items: center;
-      }
-      .opcion-selector {
-        min-width: 13vw;
-        font-size: .9rem;
-        display: flex;
-        gap: .2rem
-    }
+      flex-direction: column;    
+      gap: .3rem;              
     }
   }
+  
+}
+
+.flechaBajo {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  align-items: center;
+} 
+
+.opcion-selector {
+  min-width: 13vw;
+  font-size: .9rem;
+  display: flex;
+  flex-direction: row;
+  gap: .2rem
 }
 
 .closeSelector {
   height: 1.5rem;
   overflow: hidden;
+  
 }
 
 .productosContenedor {

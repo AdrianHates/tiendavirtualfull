@@ -1,15 +1,15 @@
 import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { AppContext } from '../../App';
 
 function Login( { backendURL } ) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
   const { user, setUser, setShowModal } = useContext(AppContext);
-  
+
+
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
     try {
       const response = await fetch(`${backendURL}/api/user/login`, {
         method: 'POST',
@@ -25,7 +25,7 @@ function Login( { backendURL } ) {
         setUser(data.user);
         setShowModal(false);
         alert(data.message);
-        navigate("/");
+        return <Navigate to='/' replace={true} />
         
       } else {
         // Las credenciales son inválidas, mostrar un mensaje de error al usuario
