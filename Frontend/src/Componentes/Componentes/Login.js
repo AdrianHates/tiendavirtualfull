@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import { Navigate } from 'react-router-dom';
 import { AppContext } from '../../App';
 
 function Login( { backendURL } ) {
@@ -25,7 +24,6 @@ function Login( { backendURL } ) {
         setUser(data.user);
         setShowModal(false);
         alert(data.message);
-        return <Navigate to='/' replace={true} />
         
       } else {
         // Las credenciales son inválidas, mostrar un mensaje de error al usuario

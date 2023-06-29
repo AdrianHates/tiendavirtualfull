@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState, useEffect, createContext } from 'react';
-import { NavLink, Routes, Route, useLocation, json } from 'react-router-dom';
+import { NavLink, Routes, Route, useLocation } from 'react-router-dom';
 //pages
 import HomePage from './Componentes/Pages/HomePage';
 import RegisterPage from './Componentes/Pages/RegisterPage';
@@ -30,6 +30,7 @@ function App() {
   const [opcionSeleccionada, setOpcionSeleccionada] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [mostrar, setMostrar] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const location = useLocation();
   const isCarritoPage = location.pathname === '/carrito'
@@ -60,24 +61,34 @@ function App() {
     }
   }
 
-  useEffect(() => {
-      fetch(`${backendURL}/api/get/products`)
-      .then(res => res.json())
-      .then(data => setProducts(data))
-      .catch(error => console.error(error));
-    
-      fetch(`${backendURL}/api/user/usuarioLog`)
-      .then(res => {
-        if (!res.ok) {
-          throw new Error('');
+  useEffect( () => {
+  
+    async function fetchFunction() {
+      try {
+        const [productsResponse, userLogResponse] = await Promise.all([fetch(`${backendURL}/api/get/products`), fetch(`${backendURL}/api/user/usuarioLog`)])
+        
+        const products = await productsResponse.json()
+        const userLog = await userLogResponse.json()
+        
+        if(productsResponse.ok) {
+        setProducts(products)
+      
         }
-        return res.json();
-      })
-      .then(data => setUser(data))
-      .catch(error => console.error(error));
-
-  }, []);
-
+       
+        if(userLogResponse.ok) {
+        setUser(userLog)
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    
+    }
+      fetchFunction()
+    }
+    
+  , []);
+    console.log(user)
+    console.log(products)
   const sumarCantidades = (user) => {
     return user && user.carts && user.carts.items ? user.carts.items.reduce((total, item) => total + (item.quantity || 0), 0) : 0;
   };

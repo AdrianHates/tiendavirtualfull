@@ -32,7 +32,6 @@ router.post('/login', (req, res, next) => {
 
 router.get('/logout', isAuthenticated, (req, res) => {
   req.logout(() => {});
-  res.redirect('/')
 });
 
 router.get('/usuarioLog', isLog, async (req, res) => {

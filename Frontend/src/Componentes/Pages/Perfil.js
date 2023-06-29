@@ -1,19 +1,20 @@
 import React, { useContext } from 'react'
 import { AppContext } from '../../App'
 import { backendURL } from '../Componentes/Variables';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Perfil () {
   const { user, setUser } = useContext(AppContext);
   console.log(user)
-
+  const navigate = useNavigate()
   async function cerrarSesion () {
     const response = await fetch(`${backendURL}/api/user/logout`, {
       method: 'GET',
     })    
     if(response.ok) {
-      console.log('logout exitoso')
-      return <Navigate to='/' replace={true} />
+      setUser(null)
+      navigate("/")
+      
     } else {
       console.log('algo pas[o] D:')
     }

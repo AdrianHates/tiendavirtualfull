@@ -18,6 +18,7 @@ import getRouter from'./rutas/get.js'
 import authRouter from'./rutas/auth.js'
 import adminRouter from'./rutas/admin.js'
 import cartRouter from'./rutas/cart.js'
+import paymentRoutes from './rutas/payment.routes.js'
 
 //iniciación - configurando
 const app = express();
@@ -54,12 +55,14 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, '../Frontend/build/')));
 
 //Usando rutas
+
 app.use('/api/users', userRoutes);
 app.use('/api/user', authRouter);
 app.use('/api/get', getRouter);
 app.use('/admin', adminRouter);
 app.use('/api/addtocart', cartRouter);
-app.get('*', (req, res) => {
+
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../Frontend/build/index.html'));
 })
 
