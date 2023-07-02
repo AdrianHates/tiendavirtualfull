@@ -3,11 +3,12 @@ import morgan from "morgan"
 import cors from 'cors'
 import path from 'path'
 import session from 'express-session'
-import passport from './configuracion/auth.js';
+import passport from './passport/auth.js';
 import cookieParser from 'cookie-parser'
 import { database } from './database.js'
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { PORT, SECRET } from './config.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -26,18 +27,10 @@ app.use(morgan("dev"))
 app.use(express.json())
 app.use(cors());
 database()
-//config paypal
-/*const paypal = require('paypal-rest-sdk');
-paypal.configure({
-  'mode': 'sandbox',
-  'client_id': process.env.PAYPAL_CLIENT_ID,
-  'client_secret': process.env.PAYPAL_CLIENT_SECRET
-});
-*/
 //config session
 app.use(cookieParser())
 app.use(session({
-  secret: process.env.SECRET,
+  secret: SECRET,
   resave: true,
   saveUninitialized: false,
     //cookie: {      
@@ -61,12 +54,13 @@ app.use('/api/user', authRouter);
 app.use('/api/get', getRouter);
 app.use('/admin', adminRouter);
 app.use('/api/addtocart', cartRouter);
+app.use('/', paymentRoutes)
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../Frontend/build/index.html'));
 })
 
 
-app.listen(5000, () => {
+app.listen(PORT, () => {
   console.log(`Servidor iniciado en puerto 5000`);
 });

@@ -1,10 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AppContext } from '../../App';
 import MercadoPago from "mercadopago";
 import SecuenciaCompra from "../Componentes/SecuenciaCompra";
 import Logo from '../Componentes/Logo';
 import { HiArrowLongLeft } from 'react-icons/hi2'
+import { backendURL } from '../Componentes/Variables';
+import { iconoPaypalButton, paypalButton } from '../../svg/iconos';
 
 function Inicial () {
   return(
@@ -24,56 +26,18 @@ function Inicial () {
 
 function Carrito() {
   const { user, setUser } = useContext(AppContext);  
-  const [metodoPago, setMetodoPago] = useState(null);
-  const [nombreTarjeta, setNombreTarjeta] = useState('');
-  const [numeroTarjeta, setNumeroTarjeta] = useState('');
-  const [fechaExpiracion, setFechaExpiracion] = useState('');
-  const [codigoSeguridad, setCodigoSeguridad] = useState('');
-  const [mostrarModal, setMostrarModal] = useState(false);
   
-  
-  // Calcular el total del carrito
   const total = user?user.carts.items.reduce((acc, item) => {
     return acc + item.quantity * item.product.price;
   }, 0):null;
 
-  const handleBuy = () => {
-    // Preparar los datos para la pasarela de pago
-    setMostrarModal(true);
-  }
-
-  const handlePagoTarjeta = () => {
-    // Configurar MercadoPago con tu clave pública
-    MercadoPago.setPublishableKey("TU_CLAVE_PUBLICA_DE_MERCADOPAGO");
-
-    // Crear una preferencia de pago
-    const preference = {
-      items: user.carts.items.map((item) => ({
-        title: item.product.name,
-        unit_price: item.product.price,
-        quantity: item.quantity,
-      })),
-      total_amount: total,
-      currency_id: "USD", // Moneda del total de la compra
-    };
-
-    // Crear la preferencia de pago en el backend y obtener la URL de pago
-    fetch("/api/crear-preferencia", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(preference),
+  async function comprarPaypal () {
+    const response = await fetch(`${backendURL}/crear-orden`, {
+      method: 'POST'
     })
-      .then((response) => response.json())
-      .then((data) => {
-        // Redirigir al usuario a la URL de pago de MercadoPago
-        window.location.href = data.init_point;
-      })
-      .catch((error) => {
-        console.error("Error al crear preferencia de pago:", error);
-      });
-  };
+    const data = await response.json()
+    window.location.href = data.links[1].href
+  }
 
   const handleRemoveFromCart = async (itemId) => {
     try {
@@ -97,7 +61,7 @@ function Carrito() {
       alert('Ocurrió un error al intentar eliminar del carrito');
     }
   };
-console.log(user)
+  
   return (    
     <div id='carrito'>
       <div id='encabezadoCarrito'>
@@ -116,6 +80,7 @@ console.log(user)
       <SecuenciaCompra />
       <div id='contenedorProductosCarrito'>
         {user?
+        <>
         <table id='productosCarrito'>
           <thead>
             <tr>
@@ -148,68 +113,18 @@ console.log(user)
           </tr>
           ))}
           </tbody>
-        </table>:<Inicial />}     
-      {/* Renderizar el modal de selección de método de pago */}
-      {mostrarModal && (
-        <div>
-          <h2>Selecciona un método de pago:</h2>
-          <button onClick={() => setMetodoPago("tarjeta")}>
-            Pagar con Tarjeta
-          </button>
-          <button onClick={() => setMetodoPago("paypal")}>
-            Pagar con PayPal
-          </button>
+        </table>  
+        <div id='resumenCompra'>
+          <p id='resumenTitulo'>Resumen de compra</p>
+          <div id='total'>
+            <p>Total</p>
+            <p id='totalCompra'>{`S/ ${total.toFixed(2)}`}</p>
+          </div>
+          <div id='paypalButton' onClick={comprarPaypal} >{iconoPaypalButton}{paypalButton}</div>
         </div>
-      )}
-      {/* Realizar el pago con el método de pago seleccionado - Corregir todo esto y finalizar*/}
-{metodoPago && (
-  <div>
-    {metodoPago === "tarjeta" && (
-      <div>
-        {/* Renderizar formulario de pago con tarjeta */}
-        <h2>Pago con Tarjeta</h2>
-        <form onSubmit={handlePagoTarjeta}>
-          {/* Renderizar campos del formulario */}
-          <input
-            type="text"
-            placeholder="Nombre en la tarjeta"
-            value={nombreTarjeta}
-            onChange={(e) => setNombreTarjeta(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Número de tarjeta"
-            value={numeroTarjeta}
-            onChange={(e) => setNumeroTarjeta(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Fecha de expiración"
-            value={fechaExpiracion}
-            onChange={(e) => setFechaExpiracion(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Código de seguridad"
-            value={codigoSeguridad}
-            onChange={(e) => setCodigoSeguridad(e.target.value)}
-          />
-          <button type="submit">Realizar Pago</button>
-        </form>
-      </div>
-    )}
-    </div>
-    )}
-    {user?
-    <div id='resumenCompra'>
-      <p id='resumenTitulo'>Resumen de compra</p>
-      <div id='total'>
-        <p>Total</p>
-        <p id='totalCompra'>{`S/ ${total.toFixed(2)}`}</p>
-      </div>
-      <button className='buttonCarrito' onClick={handleBuy}>Ir a comprar</button>
-    </div>:null}
-    </div>
+        </>
+        :<Inicial />}        
+      </div> 
     </div>)}
 
 export default Carrito;

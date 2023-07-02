@@ -1,8 +1,8 @@
-import express from 'express'
+import { Router } from  'express'
+const router = Router()
 import  Product from '../esquemas/products.js'
 import Cart from '../esquemas/cart.js'
 import User from '../esquemas/User.js'
-const router = express.Router();
 
 router.post('/', async (req, res) => {
   try {
@@ -34,7 +34,14 @@ router.post('/', async (req, res) => {
       cart.items.push({ product: product.id, quantity: parseInt(quantity) });
     }
     await cart.save();
-    const Usuario = await User.findById(req.user.id).populate('carts.items.product');
+    const Usuario = await User.findById(req.user.id).populate({
+      path: 'carts',
+      model: 'Cart',
+      populate: {
+        path: 'items.product',
+        model: 'Product'
+      }
+    });
     res.status(201).json({ message: 'El producto se ha agregado al carrito', Usuario });
   } catch (error) {
     console.error(error);

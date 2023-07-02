@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState, useEffect, createContext } from 'react';
-import { NavLink, Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 //pages
 import HomePage from './Componentes/Pages/HomePage';
 import RegisterPage from './Componentes/Pages/RegisterPage';
@@ -13,166 +13,53 @@ import Devoluciones from './Componentes/Pages/Devoluciones';
 //componentes
 import Login from './Componentes/Componentes/Login'
 import Contacto from './Componentes/Componentes/Contacto';
-import Logo from './Componentes/Componentes/Logo';
 import Informacion from './Componentes/Componentes/Informacion';
-//icons
-import { HiUserCircle, HiOutlineShoppingBag } from 'react-icons/hi';
-
+import Navegador from './Componentes/Componentes/Navegador';
 //datos
 import { tienda, backendURL } from './Componentes/Componentes/Variables'
+import PagoCompletadoPaypal from './Componentes/Componentes/PagoCompletadoPaypal';
+
 export const AppContext = createContext(); 
 
 
 function App() {
   const [user, setUser] = useState(null);
   const [products, setProducts] = useState(null);
-  const [cantidadCarrito, setCantidadCarrito] = useState(0);
   const [opcionSeleccionada, setOpcionSeleccionada] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [mostrar, setMostrar] = useState(false);
-  const [loading, setLoading] = useState(false)
-
+  const [loading, setLoading] = useState(true)
   const location = useLocation();
   const isCarritoPage = location.pathname === '/carrito'
+  const pagoCompletadoPaypal = location.pathname === '/orden-completada'
   
-  const resetAll = () => {
-    setOpcionSeleccionada([]);
-    if(document.querySelectorAll('input[type="checkbox"]')) {
-      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-      checkboxes.forEach((checkbox) => {
-      checkbox.checked = false;
-    });
-    }
-  }
+  useEffect(() => {
+      Promise.all([fetch(`${backendURL}/api/get/products`).then(res=>res.json()), fetch(`${backendURL}/api/user/usuarioLog`).then(res=>{
+        if (!res.ok) {
+          console.log(res.status)
+        }
+        return res.json()
+      })]).then(([productsData, userData]) => {
+        
+        setProducts(productsData)
+        if(!userData.error) {
+        setUser(userData)
+        }
+        setLoading(false)
+      }).catch((error) => {
+        console.error(error)
+        setLoading(false)
+        })
+  }, []);
   
-  const handleShowModal = () => {
-    setShowModal(true);
-  };
-
   const handleCloseModal = () => {
     setShowModal(false);
   };
-
-  const metodoMostrar = () => {
-    if(mostrar) {
-      setMostrar(false)
-    } else {
-      setMostrar(true)
-    }
-  }
-
-  useEffect( () => {
   
-    async function fetchFunction() {
-      try {
-        const [productsResponse, userLogResponse] = await Promise.all([fetch(`${backendURL}/api/get/products`), fetch(`${backendURL}/api/user/usuarioLog`)])
-        
-        const products = await productsResponse.json()
-        const userLog = await userLogResponse.json()
-        
-        if(productsResponse.ok) {
-        setProducts(products)
-      
-        }
-       
-        if(userLogResponse.ok) {
-        setUser(userLog)
-        }
-      } catch (error) {
-        console.error(error)
-      }
-    
-    }
-      fetchFunction()
-    }
-    
-  , []);
-    console.log(user)
-    console.log(products)
-  const sumarCantidades = (user) => {
-    return user && user.carts && user.carts.items ? user.carts.items.reduce((total, item) => total + (item.quantity || 0), 0) : 0;
-  };
-
-  useEffect(() => {
-    const totalCantidades = sumarCantidades(user);
-    setCantidadCarrito(totalCantidades);
-  }, [user]);
-  
-
   return(
-    <AppContext.Provider  value={{ user, setUser, products, setProducts, setShowModal, opcionSeleccionada, setOpcionSeleccionada }}>    
-      {isCarritoPage?null:(
-        <nav id='nav'>
-          <ul>
-            <li>
-              <Logo tienda={tienda} />
-            </li>
-            <li>
-              <ul style={{display: 'Flex', gap: '1rem', listStyleType: 'none'}}>
-                <li>
-                <NavLink to="/productos/mujer" className={({isActive})=>{
-                  return isActive ? 'is-active' : undefined
-                }} onClick={resetAll}>
-                  Mujer
-                </NavLink>
-                </li>
-                <li>
-                <NavLink to="/productos/hombre" className={({isActive})=>{
-                  return isActive ? 'is-active' : undefined
-                }} onClick={resetAll}>
-                  Hombre
-                </NavLink>
-                </li>
-                <li>
-                <NavLink to="/productos/niños" className={({isActive})=>{
-                  return isActive ? 'is-active' : undefined
-                }} onClick={resetAll}>
-                  Niños
-                </NavLink>
-                </li>
-                <li>
-                <NavLink to="/productos/marcas" className={({isActive})=>{
-                  return isActive ? 'is-active' : undefined
-                }} onClick={resetAll}>
-                  Marcas
-                </NavLink>
-                </li>
-              </ul>
-            </li>            
-            <ul style={{display: 'flex', alignItems: 'center', gap: '1rem', listStyleType: 'none'}}>              
-              {user ? 
-                <NavLink to='/api/user/perfil'>
-                  <div>                  
-                  <HiUserCircle className='iconMiCuenta' />
-                  <div>Mi perfil</div>
-                  </div>
-                </NavLink> :
-              <li id='miCuenta' onClick={metodoMostrar}>
-                <div>                  
-                  <HiUserCircle className='iconMiCuenta' />
-                  <div>Mi cuenta</div>
-                </div>
-                {mostrar &&
-                (<div id='ingresar'>                  
-                  <button onClick={handleShowModal}>Login</button>     
-                  <NavLink to='/api/users/register'>
-                    Register
-                  </NavLink>
-                </div>)}
-              </li>}
-              <li>
-                <NavLink to="/carrito">
-                <div style={{position:'relative', display: 'flex', flexDirection:'column',alignItems:'center'}}>                  
-                  <HiOutlineShoppingBag className='iconMiCuenta' />
-                  {/*corregir position, translate */}
-                  <div style={{position: 'absolute', top: '0.5rem', left:'0', color:'red', width:'100%', fontWeight: '500', textAlign: 'center'}}>{cantidadCarrito}</div>
-                  <div>Carrito</div>
-                </div>
-                </NavLink>
-              </li>             
-            </ul>
-          </ul>
-        </nav>)}
+    <AppContext.Provider  value={{ user, setLoading, setUser, products, setProducts, setShowModal, opcionSeleccionada, setOpcionSeleccionada }}>
+    {loading ? <h1>LOADING ...</h1> : <>
+    {pagoCompletadoPaypal ? null : (
+      isCarritoPage?null:<Navegador /> )}
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/productos/hombre" element={<Category category='Hombre' />} />
@@ -184,6 +71,7 @@ function App() {
           <Route path="/productos/:id" element={<ProductDetails />} />
           <Route path="/informacion/nosotros" element={<Nosotros tienda={tienda} />} />
           <Route path="/cambios-y-devoluciones" element={<Devoluciones />} />
+          <Route path="/orden-completada" element={<PagoCompletadoPaypal />} />
         </Routes>
         {showModal && (
                   <div className="modelo">
@@ -195,7 +83,7 @@ function App() {
                     </div>
                   </div>
         )}
-        
+        {pagoCompletadoPaypal ? null : <>    
         <Informacion tienda={tienda} />
         <div className='divHr'>
         <hr className='hr'/>
@@ -203,7 +91,9 @@ function App() {
         <Contacto />           
         <footer>
           Example 2023 © Todos los derechos reservados
-        </footer>    
+        </footer>
+        </>}
+        </>}
   </AppContext.Provider> 
   );
 }

@@ -1,5 +1,5 @@
-import express from 'express'
-const router = express.Router();
+import { Router } from  'express'
+const router = Router()
 import passport from 'passport';
 import path from 'path';
 

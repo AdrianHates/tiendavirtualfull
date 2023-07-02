@@ -4,17 +4,17 @@ import { backendURL } from '../Componentes/Variables';
 import { useNavigate } from 'react-router-dom';
 
 function Perfil () {
-  const { user, setUser } = useContext(AppContext);
-  console.log(user)
+  const { user, setUser, setLoading } = useContext(AppContext);
+
   const navigate = useNavigate()
+
   async function cerrarSesion () {
-    const response = await fetch(`${backendURL}/api/user/logout`, {
-      method: 'GET',
-    })    
-    if(response.ok) {
+    
+    const response = await fetch(`${backendURL}/api/user/logout`)
+  
+    if(response.ok) {      
       setUser(null)
       navigate("/")
-      
     } else {
       console.log('algo pas[o] D:')
     }

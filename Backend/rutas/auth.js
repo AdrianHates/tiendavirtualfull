@@ -1,6 +1,6 @@
-import express from 'express'
+import { Router } from  'express'
+const router = Router()
 import passport from 'passport';
-const router = express.Router();
 import User from '../esquemas/User.js'
 
 router.post('/login', (req, res, next) => {
@@ -32,6 +32,7 @@ router.post('/login', (req, res, next) => {
 
 router.get('/logout', isAuthenticated, (req, res) => {
   req.logout(() => {});
+  res.sendStatus(200); 
 });
 
 router.get('/usuarioLog', isLog, async (req, res) => {

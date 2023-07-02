@@ -32,7 +32,7 @@ function NewsletterForm() {
   return (
     <div id='newsletter'>
       <h5>SUSCRÍBETE PARA RECIBIR NOVEDADES</h5>
-      <p>¡Cupones exclusivos y notificaciones de nuestros mejores eventos!</p>
+      <p><span className='negrita'>¡Cupones exclusivos</span> y notificaciones de nuestros <span className='negrita'>mejores eventos!</span></p>
       <form onSubmit={handleSubmit}>
         <div className='newsletter1'>
           <div>
@@ -43,7 +43,7 @@ function NewsletterForm() {
         </div>
         <div className='newsletter2'> 
             <input type="checkbox" id="terminos" checked={aceptarTerminos} onChange={(e) => setAceptarTerminos(e.target.checked)} />
-            <label htmlFor="terminos">He leído y acepto la política de protección de datos personales.</label>
+            <label htmlFor="terminos">He leído y acepto la <span className='subrayado'>política de protección</span> de datos personales.</label>
         </div>
       </form>
     </div>

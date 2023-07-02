@@ -11,11 +11,14 @@
   --c-mainMedium: #313131;
   --c-mainLow: #404040;
   --c-dorado: #efb810;
+  --c-Paypal: #ffc439;
   --c-gris-1: #bdbdbd;
   --c-blanco: white;
   --c-blanco-suave: #F7F7F7;
   --c-naranja1: #fda085;
+  --c-dorado-fino: #dd9933;
   --gradiente1: linear-gradient(to right, #f6d365, #fda085);
+  --family-like: 'Montserrat'
 }
 
 * {
@@ -31,6 +34,10 @@
   justify-content: center;
 }
 
+ul {
+  padding: 0;
+}
+
 p {
   padding: 0; 
   margin: 0
@@ -42,6 +49,11 @@ p {
   position: sticky;
   top: 0;
   z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid var(--c-blanco-suave);
+  border-bottom: 1px solid var(--c-blanco-suave)
 }
 
 a {
@@ -54,39 +66,78 @@ a {
 }
 
 #nav > ul {
-  padding: 1rem 0;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   list-style-type: none;
-  gap: 1rem;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 0 5rem;
   background-color: var(--c-blanco);
+  gap:1rem;
+  margin: 0;
   width: 100%;
-  & li:nth-of-type(2) > ul a {
-    text-decoration: none;
-    color: var(--c-mainHigh);
-    padding: .2rem 0;
-    &:hover {  
-      border-bottom: .2rem solid var(--c-rojo);
-      color: var(--c-mainHigh);
+  & > li:nth-of-type(2) > ul {
+      list-style-type: none;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      & > li > a {
+      text-decoration: none;
+      padding: .2rem 0;
+      &:hover {  
+        border-bottom: .1rem solid var(--c-dorado-fino);
+      }
+    }
+  }
+  & > ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: .65rem;
+    & li {
+      padding: .5rem;
+      border-right: 1px solid var(--c-blanco-suave);      
     }
   }
 }
+
+#miCuenta {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  border-left: 1px solid var(--c-blanco-suave);
+  position: relative;
+  & > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+  }
+}
+
+.iconMiCuenta {
+  font-size: 2rem;
+  width: 100%; 
+  fill: var(--c-gris-1);
+
+ }
 
 #homepage {
   width: 100%;
 }
 
 .is-active {
-  font-weight: bold;
   pointer-events: none;
+  color: var(--c-dorado-fino)
 }
 
 /*Carrusel*/
 
 .w-100 {
-  height: 45vh;
   object-fit: contain;
 }
 
@@ -96,6 +147,7 @@ a {
   flex-wrap: wrap;
   background-color: var(--c-gris-1);
   justify-content: center;
+  align-items: center;
   #newsletter {
     padding: 1rem 2rem;
     max-width: 550px;
@@ -105,15 +157,21 @@ a {
     background-color: var(--c-gris-1);
     & > form {
         .newsletter1 {
+        margin-top: 1rem;
         display: flex;
         flex-wrap: wrap;
         gap: 1.5rem;
-        align-items: center;
+        align-items: flex-end;
+          & label {
+            font-style: italic;
+            font-weight: 600;
+          }
         }
 
         .newsletter2 {
           display: flex;
           gap: 0.5rem;
+          margin-top: 1rem;
           align-items: center;
         }
 
@@ -143,6 +201,13 @@ a {
   }
 }
 
+.negrita {
+  font-weight: 700;
+}
+
+.subrayado {
+  text-decoration: underline
+}
 /*Carrito*/
 
 /*secuenciaCompra*/
@@ -263,6 +328,18 @@ a {
   }
 }
 
+#paypalButton {
+  margin: 2rem auto;
+  padding: .5rem 4rem;
+  cursor: pointer;
+  background-color: var(--c-Paypal);
+  color: var(--c-blanco);
+  border-radius: .2rem;
+}
+#paypalButton:hover {
+  box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.05)
+}
+
 .imagenProductoCarrito {
   height: 150px;
   object-fit: contain;
@@ -369,12 +446,14 @@ td {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    
+    & h5 {
+      font-weight: 700;
+    }
 
     & ul {
       list-style-type: none;
       padding: 0;
-    
+      font-family: var(--family-like);
     }
 
     & div {
@@ -401,6 +480,10 @@ td {
   display: flex;
   flex-direction: column;
   text-align: center;
+  font-family: var(--family-like);
+  & > h4 {
+    font-weight: 1000;
+  }
 }
 
 .contacto1 {
@@ -448,14 +531,10 @@ footer {
   padding: 1rem 0;
   color: var(--c-blanco);
   text-align: center;
+  font-family: var(--family-like);
 }
 
-/*Mi Cuenta*/
-
-.iconMiCuenta {
- font-size: 2rem;
- width: 100%; 
-}
+/*Modal mi cuenta*/
 
 .modelo {
   position: fixed;
@@ -495,19 +574,6 @@ footer {
 }
 
 /*ingresar*/
-#miCuenta {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  cursor: pointer;
-  position: relative;
-  & > div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }  
-}
 
 #ingresar {
   display: flex;
@@ -515,13 +581,12 @@ footer {
   background-color: var(--c-blanco);
   border-radius: .2rem;
   position: absolute;
-  top: 35px;
-  right: -30px;
+  top: 4.5rem;
+  right: -1.7rem;
   padding: 1rem;
   gap: 1rem;  
   z-index: 10;
   box-shadow: 1px 1px 5px 1px var(--c-gris-1);
-
 }
 
 #ingresar > button, #ingresar > a {
@@ -740,6 +805,57 @@ footer {
   padding: 0 1rem;
 }
 
+/*pago completado*/
+#orden-completada {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  & > button {
+    border: none;
+    text-decoration: underline;
+    color: mediumorchid;
+    background-color: #fff;
+  }
+}
+
+.visto-bueno {
+  display: inline-block;
+  width: 10rem;
+  height: 10rem;
+  position: relative;
+  border-radius: 50%;
+  background-color: green;
+  margin-bottom: 1rem
+}
+
+.visto-bueno::before,
+.visto-bueno::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 2rem;
+  height: 0.8rem;
+  background-color: white;
+}
+
+.visto-bueno::before {
+  left: 2rem;
+  transform: translate(0%, 220%) rotate(45deg);
+}
+
+.visto-bueno::after {
+  right: 2rem;
+  transform: translate(-47.4%,60%) rotate(-45deg);
+}
+
+.visto-bueno::after {
+  width: 5rem;
+  right: 0;
+}
+
 @media (max-width: 1150px) {
   #resumenCompra {
     width: 765px;
@@ -784,5 +900,11 @@ footer {
       margin: 0 3rem
     }
   
+  }
+}
+
+@media (max-width: 750px) {
+  #nav {
+    display: none
   }
 }

@@ -25,7 +25,7 @@ function ProductDetails() {
       if (response.ok) {
         setUser(data.Usuario)
         alert(data.message); 
-        console.log(user)       
+        console.log(data.Usuario)       
       } else {
         alert(data.message);
       }
