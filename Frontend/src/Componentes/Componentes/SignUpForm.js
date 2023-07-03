@@ -38,7 +38,6 @@ function SignUpForm() {
 
       if (response.ok) {        
         alert(data.message);
-        navigate("/api/user/login")
       } else {
         alert(data.error);
       }
