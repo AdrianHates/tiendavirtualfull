@@ -4,7 +4,7 @@ import  Product from '../esquemas/products.js'
 import Cart from '../esquemas/cart.js'
 import User from '../esquemas/User.js'
 
-router.post('/', async (req, res) => {
+router.post('/addtocart', async (req, res) => {
   try {
     const { id, quantity } = req.body;
     const product = await Product.findById(id);
@@ -16,18 +16,19 @@ router.post('/', async (req, res) => {
     if(!req.user) {
       throw new Error('Iniciar Sesión')
     }    
-    const user = await User.findById(req.user.id);
+    const user = await User.findById(req.user._id);
     
     if (!user) {
       throw new Error('El usuario no existe');
     }
-    let cart = await Cart.findOne({ userId: user.id });
+    let cart = await Cart.findOne({ userId: user._id });
     
     if (!cart) {
       cart = new Cart({ userId: user.id });
     }
+    
     const item = cart.items.find((item) => item.product.toString() === product.id.toString());
-    console.log(item)
+
     if (item) {
       item.quantity += parseInt(quantity);
     } else {
@@ -56,5 +57,28 @@ router.post('/', async (req, res) => {
   
     res.status(500).json({ message: errorMessage });
   }})
+
+  router.delete('/removefromcart/:id', async (req, res) => {
+    try {
+    const itemId = req.params.id
+    const cart = await Cart.findOne({ userId: req.user._id })
+    console.log(cart.items)
+    const itemIndex = cart.items.findIndex((item) => item.product.id===itemId)
+    cart.items.splice(itemIndex, 1);
+    await cart.save();
+    const Usuario = await User.findById(req.user.id).populate({
+      path: 'carts',
+      model: 'Cart',
+      populate: {
+        path: 'items.product',
+        model: 'Product'
+      }
+    });
+    return res.status(200).json({ message: 'Elemento eliminado del carrito', Usuario });
+    } catch(error) {
+      console.error(error)
+      return res.status(500).json({ message: 'Error al eliminar el elemento del carrito' });
+    }
+  })
 
 export default router

@@ -24,6 +24,7 @@ router.post('/login', (req, res, next) => {
             model: 'Product'
           }
         });
+        console.log(req.user.id)
       return res.status(200).json({ message: 'Inicio de sesión exitoso', user: usuario });
     });
   })(req, res, next);

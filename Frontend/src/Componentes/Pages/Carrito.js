@@ -25,23 +25,31 @@ function Inicial () {
 }
 
 function Carrito() {
-  const { user, setUser } = useContext(AppContext);  
-  
+  const { user, setUser, solesDolares } = useContext(AppContext);  
   const total = user?user.carts.items.reduce((acc, item) => {
     return acc + item.quantity * item.product.price;
-  }, 0):null;
+  }, 0):null
 
   async function comprarPaypal () {
+    const cambioRealizado = (total / solesDolares).toFixed(2)
+    console.log(cambioRealizado)
+    console.log(typeof(solesDolares))
     const response = await fetch(`${backendURL}/crear-orden`, {
-      method: 'POST'
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ cambioRealizado }),
     })
     const data = await response.json()
     window.location.href = data.links[1].href
   }
 
   const handleRemoveFromCart = async (itemId) => {
+    console.log(itemId)
     try {
-      const response = await fetch(`/api/removefromcart/${itemId}`, {
+
+      const response = await fetch(`${backendURL}/api/removefromcart/${itemId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -49,10 +57,9 @@ function Carrito() {
       });
       const data = await response.json();
       console.log(data);
-      if (response.ok) {
-        /*setUser(data.Usuario);*/
-        alert(data.message); 
-        console.log(user);       
+       if (response.ok) {
+        console.log(data.message); 
+        setUser(data.Usuario)
       } else {
         alert(data.message);
       }
@@ -79,7 +86,7 @@ function Carrito() {
       </div>
       <SecuenciaCompra />
       <div id='contenedorProductosCarrito'>
-        {user?
+        {user&&user.carts.items.length!==0?
         <>
         <table id='productosCarrito'>
           <thead>

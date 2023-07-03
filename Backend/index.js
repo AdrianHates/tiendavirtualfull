@@ -20,6 +20,7 @@ import authRouter from'./rutas/auth.js'
 import adminRouter from'./rutas/admin.js'
 import cartRouter from'./rutas/cart.js'
 import paymentRoutes from './rutas/payment.routes.js'
+import cambio from './api/Cambio.js'
 
 //iniciación - configurando
 const app = express();
@@ -48,12 +49,12 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, '../Frontend/build/')));
 
 //Usando rutas
-
+app.use('/', cambio)
 app.use('/api/users', userRoutes);
 app.use('/api/user', authRouter);
 app.use('/api/get', getRouter);
 app.use('/admin', adminRouter);
-app.use('/api/addtocart', cartRouter);
+app.use('/api', cartRouter);
 app.use('/', paymentRoutes)
 
 app.get('/*', (req, res) => {

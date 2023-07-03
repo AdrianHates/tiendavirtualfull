@@ -1,7 +1,9 @@
 import { PAYPAL_API_CLIENT, PAYPAL_API_SECRET, PAYPAL_API, HOST } from '../config.js'
 import axios from 'axios'
+import Cart from '../esquemas/cart.js'
 
 export const crearOrden = async (req, res) => {
+  const total = req.body.cambioRealizado
 try {
   const order = {
     intent: "CAPTURE",
@@ -9,9 +11,9 @@ try {
       {
         amount: {
           currency_code: "USD",
-            value: "100.00"
+            value: total
         }
-      },
+      },      
     ],
     application_context: {
       brand_name: "FastestStore",
@@ -47,15 +49,23 @@ try {
 
 export const capturarOrden = async (req,res)=>{
   const { token } = req.query
-
   const response = await axios.post(`${PAYPAL_API}/v2/checkout/orders/${token}/capture`, {} , {
     auth: {
       username: PAYPAL_API_CLIENT,
       password: PAYPAL_API_SECRET
     }
   })
-  console.log(response.data)
-  
+
+  const user = req.user
+  const cart = await Cart.findOne( { userId: user._id } )
+  const productosComprados = cart.items
+  for(const producto of productosComprados) {
+    const productoenBD = await Product.findById(producto.productID)
+    productoenBD -= producto.quantity
+    await productoenBD.save()
+  }
+  cart.items = [];
+  await cart.save();
   return res.redirect('/orden-completada')
 }
 

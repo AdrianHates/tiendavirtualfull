@@ -25,9 +25,10 @@ export const AppContext = createContext();
 function App() {
   const [user, setUser] = useState(null);
   const [products, setProducts] = useState(null);
-  const [opcionSeleccionada, setOpcionSeleccionada] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const [opcionSeleccionada, setOpcionSeleccionada] = useState([])
+  const [showModal, setShowModal] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [solesDolares, setSolesDolares] = useState(null)
   const location = useLocation();
   const isCarritoPage = location.pathname === '/carrito'
   const pagoCompletadoPaypal = location.pathname === '/orden-completada'
@@ -38,13 +39,15 @@ function App() {
           console.log(res.status)
         }
         return res.json()
-      })]).then(([productsData, userData]) => {
-        
-        setProducts(productsData)
+      }), fetch(`${backendURL}/cambio`).then(res=>res.json())]).then(([productsData, userData, cambioSolesDolares]) => {
+
         if(!userData.error) {
-        setUser(userData)
-        }
+          setUser(userData)
+          }
+        setProducts(productsData)
         setLoading(false)
+        setSolesDolares(cambioSolesDolares.venta)
+    
       }).catch((error) => {
         console.error(error)
         setLoading(false)
@@ -54,9 +57,8 @@ function App() {
   const handleCloseModal = () => {
     setShowModal(false);
   };
-  
   return(
-    <AppContext.Provider  value={{ user, setLoading, setUser, products, setProducts, setShowModal, opcionSeleccionada, setOpcionSeleccionada }}>
+    <AppContext.Provider  value={{ user, setLoading, setUser, products, setProducts, setShowModal, opcionSeleccionada, setOpcionSeleccionada, solesDolares }}>
     {loading ? <h1>LOADING ...</h1> : <>
     {pagoCompletadoPaypal ? null : (
       isCarritoPage?null:<Navegador /> )}
