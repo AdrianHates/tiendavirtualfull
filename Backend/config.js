@@ -2,7 +2,7 @@ import { config } from 'dotenv';
 config()
 
 export const PORT = 5000
-export const HOST = "http://localhost:" + PORT;
+export const HOST = process.env.HOST
 export const MONGODB_URI = process.env.MONGODB_URI
 export const SECRET = process.env.SECRET
 

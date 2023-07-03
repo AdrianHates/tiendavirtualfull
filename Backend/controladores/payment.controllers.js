@@ -20,8 +20,8 @@ try {
       brand_name: "FastestStore",
       landing_page: "NO_PREFERENCE",
       user_action: "PAY_NOW",
-      return_url: 'https://tiendavirtualfull.onrender.com/capturar-orden',
-      cancel_url: 'https://tiendavirtualfull.onrender.com/cancelar-orden',
+      return_url: `${HOST}/capturar-orden`,
+      cancel_url: `${HOST}/cancelar-orden`,
     }
   }
 

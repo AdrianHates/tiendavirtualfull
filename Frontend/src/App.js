@@ -18,7 +18,6 @@ import Navegador from './Componentes/Componentes/Navegador';
 //datos
 import { tienda, backendURL } from './Componentes/Componentes/Variables'
 import PagoCompletadoPaypal from './Componentes/Componentes/PagoCompletadoPaypal';
-
 export const AppContext = createContext(); 
 
 
