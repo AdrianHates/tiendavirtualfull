@@ -46,7 +46,7 @@ function App() {
           }
         setProducts(productsData)
         setLoading(false)
-        setSolesDolares(cambioSolesDolares.venta)
+        setSolesDolares(cambioSolesDolares.compra)
     
       }).catch((error) => {
         console.error(error)

@@ -32,8 +32,6 @@ function Carrito() {
 
   async function comprarPaypal () {
     const cambioRealizado = (total / solesDolares).toFixed(2)
-    console.log(cambioRealizado)
-    console.log(typeof(solesDolares))
     const response = await fetch(`${backendURL}/crear-orden`, {
       method: 'POST',
       headers: {
@@ -46,9 +44,7 @@ function Carrito() {
   }
 
   const handleRemoveFromCart = async (itemId) => {
-    console.log(itemId)
     try {
-
       const response = await fetch(`${backendURL}/api/removefromcart/${itemId}`, {
         method: 'DELETE',
         headers: {
@@ -56,7 +52,7 @@ function Carrito() {
         },
       });
       const data = await response.json();
-      console.log(data);
+      console.log(itemId);
        if (response.ok) {
         console.log(data.message); 
         setUser(data.Usuario)
