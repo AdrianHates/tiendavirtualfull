@@ -62,8 +62,7 @@ router.post('/addtocart', async (req, res) => {
     try {
     const itemId = req.params.id
     const cart = await Cart.findOne({ userId: req.user._id })
-    console.log(cart.items)
-    const itemIndex = cart.items.findIndex((item) => item.product.id===itemId)
+    const itemIndex = cart.items.findIndex((item) => item.id===itemId)
     cart.items.splice(itemIndex, 1);
     await cart.save();
     const Usuario = await User.findById(req.user.id).populate({
