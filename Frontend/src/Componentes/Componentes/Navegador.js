@@ -77,7 +77,7 @@ export default function Navegador() {
             </li>            
             <ul>              
               {user ? 
-                <NavLink to='/api/user/perfil'>
+                <NavLink to='/api/user/perfil' id='miPerfil'>
                   <div>                  
                   <HiUserCircle className='iconMiCuenta' />
                   <div>Mi perfil</div>

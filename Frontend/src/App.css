@@ -114,16 +114,24 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-
+    justify-content: center
   }
+}
+
+#miPerfil {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: .5rem;
+  border-left: 1px solid var(--c-blanco-suave);
+  border-right: 1px solid var(--c-blanco-suave); 
 }
 
 .iconMiCuenta {
   font-size: 2rem;
   width: 100%; 
   fill: var(--c-gris-1);
-
  }
 
 #homepage {
@@ -581,12 +589,13 @@ footer {
   background-color: var(--c-blanco);
   border-radius: .2rem;
   position: absolute;
-  top: 4.5rem;
-  right: -1.7rem;
+  top: 4rem;
+  right: -2.5rem;
   padding: 1rem;
   gap: 1rem;  
   z-index: 10;
   box-shadow: 1px 1px 5px 1px var(--c-gris-1);
+  font-size: 1rem;
 }
 
 #ingresar > button, #ingresar > a {
@@ -854,6 +863,55 @@ footer {
 .visto-bueno::after {
   width: 5rem;
   right: 0;
+}
+
+/*Perfil*/
+.perfil {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+  & > h3 {
+    padding: 2rem 0;
+  }
+  & > div {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    & > div {
+      display: flex;
+      gap: 1rem;
+      & > label {
+        width: 12.5rem;
+        font-weight: 500;
+      }
+    }
+    & > button:first-of-type {
+      background-color: var(--c-rojo);
+      border-radius: 1rem;
+      padding: .5rem;
+      border: none;
+      color: var(--c-blanco-suave);
+      font-weight: 500;
+        &:hover {   
+        box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.05)
+        }
+      }
+    
+    & > button:nth-of-type(2) {
+      background-color: var(--c-mainLow);
+      border: none;
+      border-radius: 1rem;
+      padding: .5rem;
+      color: var(--c-blanco-suave);
+      font-weight: 500;
+      :hover {   
+      box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.05)
+      }
+    }
+  }
 }
 
 @media (max-width: 1150px) {
