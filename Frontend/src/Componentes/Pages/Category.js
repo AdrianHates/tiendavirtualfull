@@ -1,8 +1,10 @@
 import React, { useContext, useState } from 'react';
+import '../../styles/Category.css'
 import Selector from '../Componentes/Selector';
 import { AppContext } from '../../App';
 import { NavLink } from 'react-router-dom';
 import { marcas } from '../Componentes/Variables'
+import SelectOptions from '../Componentes/SelectOpcions';
 
 export const opciones = [{
   categoria: 'marca',
@@ -10,7 +12,7 @@ export const opciones = [{
  }]
 
 function Category( { category } ) {
-  const { products, setProducts } = useContext(AppContext);
+  const { products, selectOptionsEstado } = useContext(AppContext);
   const { opcionSeleccionada, setOpcionSeleccionada } = useContext(AppContext);
   
 
@@ -25,11 +27,27 @@ function mostrarCategoría (arregloProductos) {
   return filtro
 }
 
-function filtrarPrecios () {
+function filtradoSelector (arreglo) {
+   return arreglo.filter(x => opcionSeleccionada.some((y)=>x[y.categoria]===y.opcion))
+}
 
+function filtradoSelectOptions (arreglo) {
+  switch(selectOptionsEstado) {
+    case "Menor a mayor": {
+    const newArreglo = [...arreglo].sort((a,b) => a.price-b.price)
+    return newArreglo
+    }
+    case "Mayor a menor": {
+    const newArreglo = [...arreglo].sort((a,b) => b.price-a.price)
+    return newArreglo;
+    }
+    default: 
+    return arreglo;
+  }
 }
 
 function showAll( array ) {
+  console.log(array)
    return array.map(arreglo => (
     <div key={arreglo._id}>
       <NavLink to={`/productos/${arreglo._id}`}>
@@ -49,13 +67,13 @@ function showAll( array ) {
     <div className='productosConTodo'>
       <Selector />
       <div className='productosContenedor'>
-      <h2>{category}</h2>
+      
       <div className='productos'>
       
-      {products&&(opcionSeleccionada.length>0?showAll(mostrarCategoría(products).filter(y => opcionSeleccionada.some((z)=>y[z.categoria]===z.opcion))):showAll(mostrarCategoría(products)))}
-      
+      {products&&(opcionSeleccionada.length>0?showAll(filtradoSelectOptions(filtradoSelector(mostrarCategoría(products)))):showAll(filtradoSelectOptions(mostrarCategoría(products))))}    
       </div>
       </div>
+      <SelectOptions />
     </div>
     
   );

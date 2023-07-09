@@ -1,4 +1,4 @@
-import { Router } from  'express'
+import { Router } from 'express'
 const router = Router()
 import passport from 'passport';
 import User from '../esquemas/User.js'

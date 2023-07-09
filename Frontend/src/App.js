@@ -8,7 +8,7 @@ import Carrito from './Componentes/Pages/Carrito';
 import Category from './Componentes/Pages/Category'
 import ProductDetails from './Componentes/Pages/ProductDetails';
 import Nosotros from './Componentes/Pages/Nosotros';
-import Perfil from './Componentes/Pages/Perfil'
+import MiCuenta from './Componentes/Pages/MiCuenta'
 import Devoluciones from './Componentes/Pages/Devoluciones';
 //componentes
 import Login from './Componentes/Componentes/Login'
@@ -28,6 +28,7 @@ function App() {
   const [showModal, setShowModal] = useState(false)
   const [loading, setLoading] = useState(true)
   const [solesDolares, setSolesDolares] = useState(null)
+  const [selectOptionsEstado, setSelectOptionsEstado] = useState('')
   const location = useLocation();
   const isCarritoPage = location.pathname === '/carrito'
   const pagoCompletadoPaypal = location.pathname === '/orden-completada'
@@ -57,7 +58,7 @@ function App() {
     setShowModal(false);
   };
   return(
-    <AppContext.Provider  value={{ user, setLoading, setUser, products, setProducts, setShowModal, opcionSeleccionada, setOpcionSeleccionada, solesDolares }}>
+    <AppContext.Provider  value={{ user, setLoading, setUser, products, setProducts, setShowModal, opcionSeleccionada, setOpcionSeleccionada, solesDolares, selectOptionsEstado, setSelectOptionsEstado }}>
     {loading ? <h1>LOADING ...</h1> : <>
     {pagoCompletadoPaypal ? null : (
       isCarritoPage?null:<Navegador /> )}
@@ -68,9 +69,9 @@ function App() {
           <Route path="/productos/niños" element={<Category category='Niños' />} />
           <Route path="/api/users/register" element={<RegisterPage />} />
           <Route path="/carrito" element={<Carrito />} />
-          <Route path="/api/user/perfil" element={<Perfil />} />
+          <Route path="/api/user/mi-cuenta" element={<MiCuenta />} />
           <Route path="/productos/:id" element={<ProductDetails />} />
-          <Route path="/informacion/nosotros" element={<Nosotros tienda={tienda} />} />
+          <Route path="/informacion/nosotros" element={<Nosotros tienda={tienda} src='https://st2.depositphotos.com/1389715/6027/i/600/depositphotos_60278103-stock-photo-brand-new-interior-of-cloth.jpg' />} />
           <Route path="/cambios-y-devoluciones" element={<Devoluciones />} />
           <Route path="/orden-completada" element={<PagoCompletadoPaypal />} />
         </Routes>

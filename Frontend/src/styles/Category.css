@@ -1,0 +1,77 @@
+.productosConTodo {
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  max-width: 1350px;
+  margin: 4rem 0;
+  padding: 0 2rem;
+  .selector {
+    padding: .5rem 0;
+    border-bottom: 1px solid var(--c-gris-1);
+    &>div {
+      display: flex;
+      flex-direction: column;    
+      gap: .3rem;              
+    }
+  }
+  & > #select-options {
+    position: absolute;
+    right: 2rem;
+    top: 0
+  }
+  
+}
+
+.flechaBajo {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  align-items: center;
+} 
+
+.opcion-selector {
+  min-width: 13vw;
+  font-size: .9rem;
+  display: flex;
+  flex-direction: row;
+  gap: .2rem
+}
+
+.closeSelector {
+  height: 1.5rem;
+  overflow: hidden;
+  
+}
+
+.productosContenedor {
+  
+  text-align: center;
+  min-height: 80vh;
+  width: 100%;
+  margin: 2rem 1rem;
+  
+}
+
+.productos {
+  grid-gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(32%, 32%));
+  justify-content: flex-start;
+  width: 100%;
+  padding: 1rem 0;
+}
+
+.productos a:hover {
+  text-decoration: none;
+}
+.productos > div > a > img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.textoProductos {
+  text-align: left;
+  padding: 1rem 0;
+}

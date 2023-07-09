@@ -1,13 +1,12 @@
 import express from 'express'
-import morgan from "morgan"
+import morgan from 'morgan'
 import cors from 'cors'
-import path from 'path'
+import path, { dirname } from 'path'
 import session from 'express-session'
-import passport from './passport/auth.js';
+import passport from './passport/auth.js'
 import cookieParser from 'cookie-parser'
 import { database } from './database.js'
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import { fileURLToPath } from 'url'
 import { PORT, SECRET } from './config.js'
 
 const __filename = fileURLToPath(import.meta.url);

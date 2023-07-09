@@ -1,11 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
-function Logo ({tienda}) {
+import { marcaLogo } from '../../svg/iconos';
+function Logo () {
   return (
     <NavLink exact={'true'} to='/'>
     
-      <img src='' alt={tienda} />
+      {marcaLogo}
     
     </NavLink>
   )

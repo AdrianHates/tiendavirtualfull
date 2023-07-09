@@ -1,4 +1,4 @@
-import { Router } from  'express'
+import { Router } from 'express'
 import { crearOrden, capturarOrden, cancelarPayment } from '../controladores/payment.controllers.js'
 const router = Router()
 

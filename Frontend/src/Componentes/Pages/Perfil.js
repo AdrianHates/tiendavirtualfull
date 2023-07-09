@@ -1,24 +1,8 @@
 import React, { useContext } from 'react'
 import { AppContext } from '../../App'
-import { backendURL } from '../Componentes/Variables';
-import { useNavigate } from 'react-router-dom';
 
 function Perfil () {
-  const { user, setUser, setLoading } = useContext(AppContext);
-
-  const navigate = useNavigate()
-
-  async function cerrarSesion () {
-    
-    const response = await fetch(`${backendURL}/api/user/logout`)
-  
-    if(response.ok) {      
-      setUser(null)
-      navigate("/")
-    } else {
-      console.log('algo pas[o] D:')
-    }
-  }
+  const { user, setUser } = useContext(AppContext);
 
   return(
     <div className='perfil'>
@@ -28,10 +12,9 @@ function Perfil () {
         <div><label>Nombre:</label></div>
         <div><label>Apellido:</label></div>
         <div><label>Email:</label>{user.email}</div>
-        <div><label>Documento de identidad</label></div>
-        <div><label>Telefono</label></div>
-        <button>Modificar Datos</button>
-        <button onClick={cerrarSesion}>Cerrar Session</button>
+        <div><label>Documento de identidad:</label></div>
+        <div><label>Telefono:</label></div>
+        <button>Modificar Datos</button>  
       </div>
       </>}
     </div>

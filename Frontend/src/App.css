@@ -53,7 +53,8 @@ p {
   align-items: center;
   justify-content: center;
   border-top: 1px solid var(--c-blanco-suave);
-  border-bottom: 1px solid var(--c-blanco-suave)
+  border-bottom: 1px solid var(--c-blanco-suave);
+  height: 4.1rem;
 }
 
 a {
@@ -70,12 +71,23 @@ a {
   flex-wrap: wrap;
   align-items: center;
   list-style-type: none;
-  justify-content: space-between;
-  padding: 0 5rem;
+  justify-content: space-around;
   background-color: var(--c-blanco);
-  gap:1rem;
+  gap: 1rem;
   margin: 0;
   width: 100%;
+  & > li:first-of-type {
+    background-color: red;
+    height: 4rem;
+    width: 7.5rem;
+    overflow: hidden;
+    & > a {
+      & > svg {
+        height: 5rem;
+        width: 7.5rem;
+      }
+    }
+  }
   & > li:nth-of-type(2) > ul {
       list-style-type: none;
       display: flex;
@@ -96,9 +108,45 @@ a {
     justify-content: center;
     align-items: center;
     font-size: .65rem;
+    
     & li {
       padding: .5rem;
-      border-right: 1px solid var(--c-blanco-suave);      
+      border-right: 1px solid var(--c-blanco-suave);
+        
+    }
+    & li:nth-of-type(2) svg {
+      font-size: 2rem;
+    }
+    & li:nth-of-type(1) svg {
+      font-size: 2rem;
+    }
+  }
+  & > div {
+    position: relative;
+    width: 25%;
+    background-color: red;
+    & input {
+      padding: .25rem;
+      width: 100%;
+    }
+    & > ul {
+      position: absolute;
+      width: 100%;
+      list-style-type: none;
+      background-color: var(--c-blanco);
+      border: none;
+      border-radius: .1rem;
+      box-shadow: 0px 0px 4px 0px black;
+      & li {
+        padding: .5rem;
+        cursor: pointer;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        &:hover {
+          background-color: var(--c-blanco-suave);
+        }
+      }
     }
   }
 }
@@ -114,11 +162,12 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center
+    justify-content: center;
+    
   }
 }
 
-#miPerfil {
+#mi-cuenta {
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -129,10 +178,13 @@ a {
 }
 
 .iconMiCuenta {
-  font-size: 2rem;
   width: 100%; 
   fill: var(--c-gris-1);
- }
+  color: var(--c-gris-1);
+  &:first-of-type {
+    font-size: 1.3rem;
+  }
+}
 
 #homepage {
   width: 100%;
@@ -277,11 +329,26 @@ a {
   height: 3rem;
   justify-content: space-between;
   font-size: 1rem;
-
+  overflow: hidden;
+  & div:first-of-type {
+    margin-left: 2rem;
+    width: 7.5rem;
+    height: 3rem;
+    & svg {
+      height: 5rem;
+      width: 7.5rem;
+      background-color: transparent;
+      & > rect {
+        fill: transparent;
+      }
+    }
+  }
+  
   & div {
     display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
+    
     & h5 {
     margin: 0
     }
@@ -658,79 +725,6 @@ footer {
   
 }
 
-/*Productos*/
-/*Productos-Datos*/
-
-.productosConTodo {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  width: 100%;
-  max-width: 1350px;
-  padding: 0 2rem;
-  .selector {
-    padding: .5rem 0;
-    border-bottom: 1px solid var(--c-gris-1);
-    &>div {
-      display: flex;
-      flex-direction: column;    
-      gap: .3rem;              
-    }
-  }
-  
-}
-
-.flechaBajo {
-  display: flex;
-  justify-content: space-between;
-  font-weight: 500;
-  align-items: center;
-} 
-
-.opcion-selector {
-  min-width: 13vw;
-  font-size: .9rem;
-  display: flex;
-  flex-direction: row;
-  gap: .2rem
-}
-
-.closeSelector {
-  height: 1.5rem;
-  overflow: hidden;
-  
-}
-
-.productosContenedor {
-  text-align: center;
-  min-height: 80vh;
-  width: 100%;
-  margin: 0 1rem;
-  
-}
-
-.productos {
-  grid-gap: 1rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(32%, 32%));
-  justify-content: flex-start;
-  width: 100%;
-  padding: 1rem 0;
-}
-
-.productos a:hover {
-  text-decoration: none;
-}
-.productos > div > a > img {
-  width: 100%;
-  object-fit: cover;
-}
-
-.textoProductos {
-  text-align: left;
-  padding: 1rem 0;
-}
-
 /*Detalles - Productos*/
 
 .detalles {
@@ -899,19 +893,27 @@ footer {
         box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.05)
         }
       }
-    
-    & > button:nth-of-type(2) {
-      background-color: var(--c-mainLow);
-      border: none;
-      border-radius: 1rem;
-      padding: .5rem;
-      color: var(--c-blanco-suave);
-      font-weight: 500;
-      :hover {   
-      box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.05)
-      }
-    }
   }
+}
+
+#mi-cuenta-page {
+  display: flex;
+  flex-direction: column;
+  padding: 5rem 0;
+  & > ul {
+    display: flex;
+    list-style-type: none;
+    gap: 1rem;
+    & > li  button {
+      padding: .5rem 1rem;        
+      border-radius: .5rem .5rem 0% 0%;
+      border: none;
+      }    
+  }
+}
+
+.opcion-pedido-seleccionado {
+  background-color: var(--c-rojo);
 }
 
 @media (max-width: 1150px) {

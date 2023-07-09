@@ -1,9 +1,10 @@
 import React, { useContext, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { AppContext } from '../../App';
-import { HiUserCircle } from 'react-icons/hi';
 import { AiFillShopping } from 'react-icons/ai'
+import { marcaLogo, userLogin, userPerfil } from '../../svg/iconos';
 import { tienda } from './Variables';
+import BuscarProductos from '../Componentes/BuscarProductos'
 import Logo from './Logo'
 
 export default function Navegador() {
@@ -41,7 +42,7 @@ export default function Navegador() {
     <nav id='nav'>
           <ul>
             <li>
-              <Logo tienda={tienda} />
+              <Logo />
             </li>
             <li>
               <ul>
@@ -74,18 +75,20 @@ export default function Navegador() {
                 </NavLink>
                 </li>
               </ul>
-            </li>            
+            </li>
+            <BuscarProductos />            
             <ul>              
               {user ? 
-                <NavLink to='/api/user/perfil' id='miPerfil'>
+                <NavLink to='/api/user/mi-cuenta' id='mi-cuenta'>
                   <div>                  
-                  <HiUserCircle className='iconMiCuenta' />
+                  <div className='iconMiCuenta'>{userPerfil}</div>
+                 
                   <div>Mi perfil</div>
                   </div>
                 </NavLink> :
               <li id='miCuenta' onClick={metodoMostrar}>
                 <div>                  
-                  <HiUserCircle className='iconMiCuenta' />
+                  <div className='iconMiCuenta'>{userLogin}</div>
                   <div>Mi cuenta</div>
                 </div>
                 {mostrar &&
