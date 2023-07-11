@@ -9,11 +9,11 @@ router.get('/cambio', (req, res) => {
   fetch(url)
     .then(response => response.json())
     .then(data => {
-      res.json(data);
+      res.json(data)
     })
     .catch(error => {
-      console.error(error);
-      res.status(500).json({ error: 'Error al obtener el tipo de cambio' });
+      console.error(error)
+      res.status(500).json({ error: 'Error al obtener el tipo de cambio' })
     })
 })
 

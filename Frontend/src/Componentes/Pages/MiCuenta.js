@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom'
 import Perfil from "../Pages/Perfil"
+import Pedidos from "../Componentes/Pedidos";
 import { backendURL } from "../Componentes/Variables";
 import { AppContext } from "../../App";
 import { AiOutlineLogout } from 'react-icons/ai'
@@ -24,7 +25,7 @@ function MiCuenta() {
 
   const miCuentaOpciones = {
     'Mi Perfil': <Perfil />,
-    'Mis Pedidos': <h1>Pedidos</h1>
+    'Mis Pedidos': <Pedidos />
   }
   
   function renderizarOpcion (str) {

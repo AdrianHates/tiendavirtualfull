@@ -75,3 +75,19 @@
   text-align: left;
   padding: 1rem 0;
 }
+
+@media (max-width: 915px) {
+  .productos {
+    
+    grid-template-columns: repeat(auto-fit,minmax(31.8%, 31.8%));
+    
+  }
+}
+
+@media (max-width: 809px) {
+  .productos {
+    
+    grid-template-columns: repeat(auto-fit,minmax(48.6%, 1fr));
+    
+  }
+}

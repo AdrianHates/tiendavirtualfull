@@ -5,7 +5,7 @@ import { promo, devoluciones } from '../Componentes/Variables';
 import { backendURL } from '../Componentes/Variables';
 
 function ProductDetails() {
-  const { products, setUser, user } = useContext(AppContext);
+  const { products, setUser } = useContext(AppContext);
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
 
@@ -34,18 +34,18 @@ function ProductDetails() {
       alert('Ocurrió un error al intentar agregar al carrito');
     }
   };
-
+  console.log(product)
   return (
     <>
     {product&&<>
     <div className='detalles'>
       <div>
-      <img src={product.url} alt={product.name} />
+      <img src={product.url} alt={product.name} style={{viewTransitionName: `view-${product._id}`}} />
       </div>
-      <div>
+      <div style={{viewTransitionName: 'view-detalles'}}>
       <h4>{product.marca}</h4>
       <h4>{product.name}</h4>
-      <p><span>Precio:</span><span>{`S/ ${product.price.toFixed(2)}`}</span></p>
+      <p><span>Precio: </span><span>{`S/ ${product.price.toFixed(2)}`}</span></p>
       <p>Stock: {product.stock}</p>
       <img src={promo} alt='promo' />
       <label>Cantidad:</label>
@@ -58,14 +58,14 @@ function ProductDetails() {
       </NavLink>
       </div>
     </div>
-    <div className='descripcion-productos-detalles'>
+    <div className='descripcion-productos-detalles' style={{viewTransitionName: 'mas-info'}}>
       <div>
         <h5>Descripcion</h5>
         <p>{product.description}</p>
       </div>
       <div>
         <h5>Caracteristicas</h5>
-        <p>xdxdxdxdxd</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       </div>
     </div>
     </>

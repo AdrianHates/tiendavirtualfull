@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { opciones } from '../Pages/Category'
 import { BsFacebook, BsLinkedin } from 'react-icons/bs'
 import { FaInstagramSquare, FaTiktok, FaYoutubeSquare } from 'react-icons/fa'
+import ModalMarcas from './ModalMarcas'
 
 
 
@@ -25,9 +26,7 @@ function Informacion( { tienda } ) {
       </div>
       <div>
         <h5>Marcas</h5>
-        <ul>
-          {opciones[0].opciones.map(opcion=><li key={opcion}>{opcion}</li>)}
-        </ul>
+        <ModalMarcas />
       </div>
       <div>
         <h5>Atención al usuario</h5>

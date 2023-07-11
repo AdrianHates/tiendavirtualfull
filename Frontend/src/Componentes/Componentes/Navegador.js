@@ -2,16 +2,17 @@ import React, { useContext, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { AppContext } from '../../App';
 import { AiFillShopping } from 'react-icons/ai'
-import { marcaLogo, userLogin, userPerfil } from '../../svg/iconos';
-import { tienda } from './Variables';
+import { userLogin, userPerfil } from '../../svg/iconos';
 import BuscarProductos from '../Componentes/BuscarProductos'
 import Logo from './Logo'
+import ModalMarcas from './ModalMarcas';
+import { useLocation } from 'react-router-dom';
 
 export default function Navegador() {
 
   const [mostrar, setMostrar] = useState(false);
-  const { setOpcionSeleccionada, setShowModal, user } = useContext(AppContext)
-
+  const { setOpcionSeleccionada, setShowModal, user, viewNavigate, estadoMarcas, setEstadoMarcas } = useContext(AppContext)
+  const location = useLocation()
   function resetAll (){
     setOpcionSeleccionada([]);
     if(document.querySelectorAll('input[type="checkbox"]')) {
@@ -20,6 +21,7 @@ export default function Navegador() {
       checkbox.checked = false;
     });
     }
+    setEstadoMarcas(false)
   }
 
   function metodoMostrar() {
@@ -34,10 +36,19 @@ export default function Navegador() {
     setShowModal(true);
   };
 
+  const mostrarModalMarcas = (event) => {
+    event.preventDefault()
+    if(estadoMarcas) {
+      setEstadoMarcas(false)
+    } else {
+      setEstadoMarcas(true)
+    }
+  }
+
   const sumarCantidades = (user) => {
     return user && user.carts && user.carts.items ? user.carts.items.reduce((total, item) => total + (item.quantity), 0) : 0;
   };
-
+  console.log(location.pathname)
   return (
     <nav id='nav'>
           <ul>
@@ -47,30 +58,32 @@ export default function Navegador() {
             <li>
               <ul>
                 <li>
-                <NavLink to="/productos/mujer" className={({isActive})=>{
-                  return isActive ? 'is-active' : undefined
-                }} onClick={resetAll}>
+                <NavLink className={`${location.pathname==='/productos/categoria/mujer'?'reactive':undefined}`} to="/productos/mujer" onClick={(event)=>{
+                  viewNavigate(event, '/productos/categoria/mujer')
+                  resetAll()
+                }}>
                   Mujer
                 </NavLink>
                 </li>
                 <li>
-                <NavLink to="/productos/hombre" className={({isActive})=>{
-                  return isActive ? 'is-active' : undefined
-                }} onClick={resetAll}>
+                <NavLink to='/productos/hombre' className={`${location.pathname==='/productos/categoria/hombre'?'reactive':undefined}`}
+                 onClick={(event)=>{
+                  viewNavigate(event, '/productos/categoria/hombre')
+                  resetAll()
+                }}>
                   Hombre
                 </NavLink>
                 </li>
                 <li>
-                <NavLink to="/productos/niños" className={({isActive})=>{
-                  return isActive ? 'is-active' : undefined
-                }} onClick={resetAll}>
+                <NavLink to="/productos/categoria/niños" className={`${location.pathname==='/productos/categoria/ni%C3%B1os'?'reactive':undefined}`} onClick={(event)=>{
+                  viewNavigate(event, '/productos/categoria/niños')
+                  resetAll()
+                }}>
                   Niños
                 </NavLink>
                 </li>
                 <li>
-                <NavLink to="/productos/marcas" className={({isActive})=>{
-                  return isActive ? 'is-active' : undefined
-                }} onClick={resetAll}>
+                <NavLink id='modal-marcas' to='' className={`${location.pathname.match('/productos/marcas/')?'reactive-multiple':undefined}`} onClick={mostrarModalMarcas}>
                   Marcas
                 </NavLink>
                 </li>
@@ -79,7 +92,9 @@ export default function Navegador() {
             <BuscarProductos />            
             <ul>              
               {user ? 
-                <NavLink to='/api/user/mi-cuenta' id='mi-cuenta'>
+                <NavLink to='/api/user/mi-cuenta' id='mi-cuenta' onClick={()=>{
+                  setEstadoMarcas(false)
+                }}>
                   <div>                  
                   <div className='iconMiCuenta'>{userPerfil}</div>
                  
@@ -111,6 +126,7 @@ export default function Navegador() {
               </li>             
             </ul>
           </ul>
+          {estadoMarcas&&<ModalMarcas />}
         </nav>
   )
 }

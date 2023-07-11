@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import cartSchema from './cart.js';
+import mongoose from 'mongoose'
+import cartSchema from './cart.js'
 import bcrypt from 'bcrypt'
 
 const userSchema = new mongoose.Schema({
@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: 'usuario'
   },
-  carts: {    
+  carts: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Cart',
     default: null
@@ -31,44 +31,45 @@ const userSchema = new mongoose.Schema({
   dni: Number,
   genero: String,
   birth: Date,
-  phone: String
-}, {
+  phone: String,
+  orders: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Order'
+  }]
+},
+{
   timestamps: true
-});
+})
 
-userSchema.pre('save', async function(next) {
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
+    return next()
+  }
   try {
     // Encriptar la contraseña antes de guardarla en la base de datos
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(this.password, salt);
-    this.password = hashedPassword;
+    const salt = await bcrypt.genSalt(10)
+    const hashedPassword = await bcrypt.hash(this.password, salt)
+    this.password = hashedPassword
 
     // Crear un carrito "Compras" para el nuevo usuario
-    const cart = new cartSchema({ name: 'Compras', userId: this._id });
-    await cart.save();
+    const cart = new cartSchema({ name: 'Compras', userId: this._id })
+    await cart.save()
 
     // Asignar el ID del carrito "Compras" al usuario
-    this.carts = cart._id;
+    this.carts = cart._id
 
-    next();
+    next()
   } catch (error) {
-    next(error);
+    next(error)
   }
-});
+})
 
-userSchema.methods.isValidPassword = async function(password) {
-
-  try {
-    if (!this.password) {
-      return false;
-    }
-    // Verificar que la contraseña sea correcta
-    return await bcrypt.compare(password, this.password);
-  } catch (error) {
-    throw error;
+userSchema.methods.isValidPassword = async function (password) {
+  if (!this.password) {
+    return false
   }
+  // Verificar que la contraseña sea correcta
+  return await bcrypt.compare(password, this.password)
 }
 
-
-
-export default mongoose.model('User', userSchema);
+export default mongoose.model('User', userSchema)

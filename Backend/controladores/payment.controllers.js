@@ -2,7 +2,7 @@ import { PAYPAL_API_CLIENT, PAYPAL_API_SECRET, PAYPAL_API, HOST } from '../confi
 import axios from 'axios'
 import Cart from '../esquemas/cart.js'
 import Product from '../esquemas/products.js'
-
+import Order from '../esquemas/order.js'
 export const crearOrden = async (req, res) => {
   const total = req.body.cambioRealizado
   try {
@@ -45,7 +45,7 @@ export const crearOrden = async (req, res) => {
   }
 }
 
-export const capturarOrden = async (req,res)=>{
+export const capturarOrden = async (req, res) => {
   const { token } = req.query
   const response = await axios.post(`${PAYPAL_API}/v2/checkout/orders/${token}/capture`, {} , {
     auth: {
@@ -57,14 +57,36 @@ export const capturarOrden = async (req,res)=>{
   const user = req.user
   const cart = await Cart.findOne({ userId: user._id })
   const productosComprados = cart.items
-  console.log(productosComprados)
   for (const producto of productosComprados) {
-    console.log(producto)
     const productoenBD = await Product.findById(producto.product)
-    console.log(productoenBD)
     productoenBD.stock -= producto.quantity
     await productoenBD.save()
   }
+  const carritoItemsOrder = []
+  let total = 0
+  const itemsOrder = productosComprados
+
+  for (const itemOrder of itemsOrder) {
+    const product = await Product.findById(itemOrder.product)
+    console.log(product)
+    const price = product.price
+    const objetoItem = {}
+    objetoItem.product = itemOrder.product
+    objetoItem.quantity = itemOrder.quantity
+    objetoItem.price = price
+    total += price
+    carritoItemsOrder.push(objetoItem)
+  }
+  const order = new Order({
+    user: user._id,
+    items: carritoItemsOrder,
+    total,
+    status: 'pago'
+  })
+  await order.save()
+  const orderId = order._id
+  user.orders.push(orderId)
+  await user.save()
   cart.items = []
   await cart.save()
   return res.redirect('/orden-completada')

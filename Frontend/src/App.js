@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useState, useEffect, createContext } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { flushSync } from 'react-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 //pages
 import HomePage from './Componentes/Pages/HomePage';
 import RegisterPage from './Componentes/Pages/RegisterPage';
@@ -18,8 +19,8 @@ import Navegador from './Componentes/Componentes/Navegador';
 //datos
 import { tienda, backendURL } from './Componentes/Componentes/Variables'
 import PagoCompletadoPaypal from './Componentes/Componentes/PagoCompletadoPaypal';
+import NoMatch from './Componentes/Pages/NoMatch'
 export const AppContext = createContext(); 
-
 
 function App() {
   const [user, setUser] = useState(null);
@@ -29,10 +30,22 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [solesDolares, setSolesDolares] = useState(null)
   const [selectOptionsEstado, setSelectOptionsEstado] = useState('')
+  const [estadoMarcas, setEstadoMarcas] = useState(false)
   const location = useLocation();
   const isCarritoPage = location.pathname === '/carrito'
   const pagoCompletadoPaypal = location.pathname === '/orden-completada'
-  
+  const navigate = useNavigate()
+  const viewNavigate = (event, newRoute) => {
+    event.preventDefault()
+    if (!document.startViewTransition) {
+      return navigate(newRoute);
+    } else {
+      return document.startViewTransition(() => {
+        flushSync(() => navigate(newRoute));
+      });
+    }
+  };
+  console.log(user)
   useEffect(() => {
       Promise.all([fetch(`${backendURL}/api/get/products`).then(res=>res.json()), fetch(`${backendURL}/api/user/usuarioLog`).then(res=>{
         if (!res.ok) {
@@ -58,15 +71,18 @@ function App() {
     setShowModal(false);
   };
   return(
-    <AppContext.Provider  value={{ user, setLoading, setUser, products, setProducts, setShowModal, opcionSeleccionada, setOpcionSeleccionada, solesDolares, selectOptionsEstado, setSelectOptionsEstado }}>
+    <AppContext.Provider  value={{ user, setLoading, setUser, products, setProducts, setShowModal, opcionSeleccionada, setOpcionSeleccionada, solesDolares, selectOptionsEstado, setSelectOptionsEstado, viewNavigate, estadoMarcas, setEstadoMarcas }}>
     {loading ? <h1>LOADING ...</h1> : <>
     {pagoCompletadoPaypal ? null : (
-      isCarritoPage?null:<Navegador /> )}
+      isCarritoPage?null: <> <Navegador /><button className='toggleButton'></button> </> )}
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/productos/hombre" element={<Category category='Hombre' />} />
-          <Route path="/productos/mujer" element={<Category category='Mujer' />} />
-          <Route path="/productos/niños" element={<Category category='Niños' />} />
+          <Route exact path="/" element={<HomePage />} />
+          <Route path='/productos/marcas/HAWK' element={<Category category='MARCAS-HAWK' />} />
+          <Route path='/productos/marcas/XIOMI' element={<Category category='MARCAS-XIOMI' />} />
+          <Route path='/productos/marcas/WRANGLER' element={<Category category='MARCAS-Wrangler' />} />
+          <Route path='/productos/categoria/hombre' element={<Category category='Hombre' />} />
+          <Route path='/productos/categoria/mujer' element={<Category category='Mujer' />} />
+          <Route path='/productos/categoria/niños' element={<Category category='Niños' />} />
           <Route path="/api/users/register" element={<RegisterPage />} />
           <Route path="/carrito" element={<Carrito />} />
           <Route path="/api/user/mi-cuenta" element={<MiCuenta />} />
@@ -74,6 +90,8 @@ function App() {
           <Route path="/informacion/nosotros" element={<Nosotros tienda={tienda} src='https://st2.depositphotos.com/1389715/6027/i/600/depositphotos_60278103-stock-photo-brand-new-interior-of-cloth.jpg' />} />
           <Route path="/cambios-y-devoluciones" element={<Devoluciones />} />
           <Route path="/orden-completada" element={<PagoCompletadoPaypal />} />
+          <Route path='*' element={<NoMatch />} />
+          
         </Routes>
         {showModal && (
                   <div className="modelo">

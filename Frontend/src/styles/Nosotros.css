@@ -11,23 +11,22 @@
     height: 27.5rem;
     overflow: hidden;
     position: relative;
-    & > img {
-      width: 100%;
-      object-fit: cover;
-      min-width: 800px;
-      position: absolute;
-      top: -5rem
+    }
+  & > div:first-of-type > img {
+    width: 100%;
+    object-fit: cover;
+    min-width: 800px;
+    position: absolute;
+    top: -5rem
     }
     & > h2 {
-      position: absolute;
-      top: 13.25rem;
-      left: 7.5%;
-      color: var(--c-blanco-suave);
-      font-family: sans-serif;
-      font-weight: 700;
-      
+    position: absolute;
+    top: 13.25rem;
+    left: 7.5%;
+    color: var(--c-blanco-suave);
+    font-family: sans-serif;
+    font-weight: 700;    
     }
-  }
   & > div:nth-of-type(2) {
     padding: 2rem;
     text-align: center;
@@ -40,17 +39,17 @@
     text-align: center;
     justify-content: space-between;
     width: 100%;
-    & > div {
-      display: flex;
-      padding: 2rem 0;
-      justify-content: space-around;
-      width: 100%;
-      & svg {
-        font-size: 5rem;
-      }
-      & h3 {
-        color: red
-      }
+  }
+  & > div:nth-of-type(3) > div {
+    display: flex;
+    padding: 2rem 0;
+    justify-content: space-around;
+    width: 100%;
+    & svg {
+      font-size: 5rem;
+    }
+    & h3 {
+      color: red
     }
   }
 }

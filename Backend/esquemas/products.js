@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const productSchema = new mongoose.Schema({
   name: {
@@ -8,7 +8,7 @@ const productSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: true,
+    required: true
   },
   price: {
     type: Number,
@@ -23,14 +23,14 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  url : {
+  url: {
     type: String,
     required: true
   },
   stock: {
     type: Number,
-    required: true,
+    required: true
   }
-});
+})
 
-export default mongoose.model('Product', productSchema);
+export default mongoose.model('Product', productSchema)

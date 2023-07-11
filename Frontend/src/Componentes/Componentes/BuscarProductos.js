@@ -8,7 +8,7 @@ export default function BuscarProductos () {
   const [searchResults, setSearchResults] = useState([]);
   const [isInputSelected, setIsInputSelected] = useState(false);
   const [maxResultsToShow, setMaxResultsToShow] = useState(5);
-  const { products } = useContext(AppContext)
+  const { products, setEstadoMarcas } = useContext(AppContext)
 
   const handleInputChange = (event) => {
     const searchTerm = event.target.value;
@@ -44,6 +44,7 @@ export default function BuscarProductos () {
           {searchResults.map((product) =>(
           <li key={product._id} onMouseDown={()=>{
             navigate(`/productos/${product._id}`)
+            setEstadoMarcas(false)
           }}>
             {product.name}    
           </li>
