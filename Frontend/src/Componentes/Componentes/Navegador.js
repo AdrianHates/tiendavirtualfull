@@ -8,7 +8,7 @@ import Logo from './Logo'
 import ModalMarcas from './ModalMarcas';
 import { useLocation } from 'react-router-dom';
 
-export default function Navegador() {
+export default function Navegador( {className} ) {
 
   const [mostrar, setMostrar] = useState(false);
   const { setOpcionSeleccionada, setShowModal, user, viewNavigate, estadoMarcas, setEstadoMarcas } = useContext(AppContext)
@@ -50,7 +50,8 @@ export default function Navegador() {
   };
   console.log(location.pathname)
   return (
-    <nav id='nav'>
+    
+    <nav id='nav' className={className}>
           <ul>
             <li>
               <Logo />
@@ -128,5 +129,6 @@ export default function Navegador() {
           </ul>
           {estadoMarcas&&<ModalMarcas />}
         </nav>
+        
   )
 }

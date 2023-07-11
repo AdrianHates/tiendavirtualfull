@@ -31,10 +31,17 @@ function App() {
   const [solesDolares, setSolesDolares] = useState(null)
   const [selectOptionsEstado, setSelectOptionsEstado] = useState('')
   const [estadoMarcas, setEstadoMarcas] = useState(false)
+  const [toggle, setToggle] = useState(false)
+  const [toggleSelector, setToggleSelector] = useState(false)
   const location = useLocation();
   const isCarritoPage = location.pathname === '/carrito'
   const pagoCompletadoPaypal = location.pathname === '/orden-completada'
   const navigate = useNavigate()
+
+  const modifyToggle = () => {
+    setToggle(!toggle)
+  }
+
   const viewNavigate = (event, newRoute) => {
     event.preventDefault()
     if (!document.startViewTransition) {
@@ -71,10 +78,11 @@ function App() {
     setShowModal(false);
   };
   return(
-    <AppContext.Provider  value={{ user, setLoading, setUser, products, setProducts, setShowModal, opcionSeleccionada, setOpcionSeleccionada, solesDolares, selectOptionsEstado, setSelectOptionsEstado, viewNavigate, estadoMarcas, setEstadoMarcas }}>
+    <AppContext.Provider  value={{ user, setLoading, setUser, products, setProducts, setShowModal, opcionSeleccionada, setOpcionSeleccionada, solesDolares, selectOptionsEstado, setSelectOptionsEstado, viewNavigate, estadoMarcas, setEstadoMarcas, toggleSelector, setToggleSelector }}>
     {loading ? <h1>LOADING ...</h1> : <>
     {pagoCompletadoPaypal ? null : (
-      isCarritoPage?null: <> <Navegador /><button className='toggleButton'></button> </> )}
+      isCarritoPage?null: <><Navegador className={`${toggle?'navLive':'navDead'}`} />        <button onClick={modifyToggle} className='toggleButton'>☰</button></>
+      )}
         <Routes>
           <Route exact path="/" element={<HomePage />} />
           <Route path='/productos/marcas/HAWK' element={<Category category='MARCAS-HAWK' />} />

@@ -44,6 +44,10 @@ p {
 }
 
 /*Nav*/
+.toggleButton {
+  display: none
+}
+
 #nav {
   width: 100%;
   position: sticky;
@@ -219,6 +223,11 @@ a {
 .reactive-multiple {
   color: var(--c-dorado-fino);
 }
+
+.is-active {
+  pointer-events: none;
+}
+
 /*Carrusel*/
 
 .w-100 {
@@ -965,14 +974,6 @@ footer {
   }
 }
 
-@media (max-width: 1050px) {
-  .selector {
-    display: none;
-  }
-
-  
-}
-
 @media (max-width: 917px) {
   .detalles > div {
     & :first-of-type, & :nth-of-type(2){
@@ -989,55 +990,89 @@ footer {
     display: flex;
     flex-direction: column;
     & > div:nth-of-type(2) {
-      margin: 0 3rem
+      margin: 0 3rem;
+      
     }
   
   }
 }
 
 @media (max-width: 750px) {
-    #nav {
-      height: 100%;
-      & > ul {    
+  #nav.navLive {
+    display: block;
+  }
+  #nav.navDead {
+    display: none
+  }
+
+    #nav {            
+      border: none;
+      height: 0;
+      & > ul {
+      position: absolute;
+      padding-top: 4.2rem;
+      background-color: var(--c-blanco-suave);
       display: flex;
-      align-items: flex-start;
-      padding: 0 3rem;
-      flex-direction: column;
-      height: 100%;
-      width: 100%;
+      align-items: flex-start;      
+      flex-direction: column;      
+      width: 100%;      
+      & > li:first-of-type {        
+        display: none;
+      }
       & > li:nth-of-type(2) {
         width: 100%;
-        & > ul {
-        display: flex;
+      }
+      
+      & > div {
         width: 100%;
-        flex-direction: column;
-        align-items: flex-start;
-        & > li {
+        padding: 0 3rem;
+        & > input {
           width: 100%;
-          & > a {
-            display: block;
-            width: 100%;
-          }
+        }
+      }
+      & > ul {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        & > li {
+          border: none
         }
       }
     }
-    & > div {
+    & > ul > li:nth-of-type(2) > ul {
+      display: flex;
       width: 100%;
-      & > input {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;          
+    }
+    & > ul > li:nth-of-type(2) > ul > li {
+      width: 100%;           
+      & > a {
+        display: block;
         width: 100%;
+        padding: .5rem 3rem;
+      }
+      & > a:hover {
+        border: none;
+        background-color: var(--c-dorado-fino);
       }
     }
+    & > div {
+      top: 15rem;
     }
   }
 
   .toggleButton {
-    display: block;
-    position: absolute;
-    width: 2.5rem;
-    height: 2.5rem;
-    top: 2rem;
-    left: 2rem;
+    display: flex;
+    position: fixed;
+    padding: .6rem 1rem;
+    border-radius: .2rem;
+    top: 1.5rem;
+    left: 1.5rem;
     z-index: 999;
-    background-color: var(--c-dorado);
+    background-color: var(--c-celeste);
+    color: var(--c-blanco-suave);
+    border: none;
   }
 }

@@ -11,6 +11,7 @@ export default function HomePage () {
         <img src='https://topitop.vteximg.com.br/arquivos/wf_suscritbe.png?v=637919847774830000' alt='newsletter' />
         <NewsletterForm />
       </div>
+
     </div>
   );
 };

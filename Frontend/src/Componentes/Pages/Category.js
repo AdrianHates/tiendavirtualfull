@@ -13,8 +13,12 @@ export const opciones = [{
  }]
 
 function Category( { category } ) {
-  const { products, selectOptionsEstado, viewNavigate, opcionSeleccionada, setEstadoMarcas } = useContext(AppContext);
+  const { toggleSelector, setToggleSelector, products, selectOptionsEstado, viewNavigate, opcionSeleccionada, setEstadoMarcas } = useContext(AppContext);
   
+  function toggleSelecctorButton () {
+    setToggleSelector(!toggleSelector)
+  }
+
   function mostrarCategoría (arregloProductos) {
     
     const filtro = arregloProductos.filter(x=> {
@@ -79,6 +83,7 @@ function Category( { category } ) {
       {products&&(opcionSeleccionada.length>0?showAll(filtradoSelectOptions(filtradoSelector(mostrarCategoría(products)))):showAll(filtradoSelectOptions(mostrarCategoría(products))))}    
       </div>
       </div>
+      <button className='toggleSelectorButton' onClick={toggleSelecctorButton}>Filtros</button>
       <SelectOptions />
     </div>
     

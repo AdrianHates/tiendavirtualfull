@@ -1,12 +1,11 @@
 .productosConTodo {
   display: flex;
-  position: relative;
   align-items: flex-start;
   justify-content: center;
   width: 100%;
   max-width: 1350px;
   margin: 4rem 0;
-  padding: 0 2rem;
+  padding: 0rem 2rem;
   .selector {
     padding: .5rem 0;
     border-bottom: 1px solid var(--c-gris-1);
@@ -19,7 +18,7 @@
   & > #select-options {
     position: absolute;
     right: 2rem;
-    top: 0
+    top: 8rem
   }
   
 }
@@ -76,6 +75,40 @@
   padding: 1rem 0;
 }
 
+.toggleSelectorButton {
+  display: none
+}
+
+@media (max-width: 1050px) {
+  .selector.selectorDead {
+    display: none;
+  }
+  .selector.selectorLive {
+    display: flex;
+    position: fixed;
+    z-index: 999;
+    background-color: var(--c-blanco-suave);
+    width: 50%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    .closeSelector, .openSelector {
+      width: 100%;
+      padding: 0 3rem;
+      
+    }
+  }
+  .toggleSelectorButton {
+    display: flex;
+    position: absolute;
+    right: 2rem;
+    top: 5rem;
+    border: none;
+    padding: .5rem;
+    background-color: var(--c-blanco-suave);
+  }
+}
+
 @media (max-width: 915px) {
   .productos {
     
@@ -87,7 +120,39 @@
 @media (max-width: 809px) {
   .productos {
     
-    grid-template-columns: repeat(auto-fit,minmax(48.6%, 1fr));
+    grid-template-columns: repeat(auto-fit,minmax(48.6%, 48.6%));
+    
+  }
+}
+
+@media (max-width: 750px) {
+  .productos {
+    
+    grid-template-columns: repeat(auto-fit,minmax(48%, 48%));
+    
+  }
+
+  .toggleSelectorButton {
+    top: 1.5rem;
+  }
+
+  .productosConTodo > #select-options {
+    top: 4.5rem;
+  }
+}
+
+@media (max-width: 650px) {
+  .productos {
+    
+    grid-template-columns: repeat(auto-fit,minmax(48%));
+    
+  }
+}
+
+@media (max-width: 550px) {
+  .productos {
+    
+    grid-template-columns: repeat(auto-fit,minmax(48%,1fr));
     
   }
 }

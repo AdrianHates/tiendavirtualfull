@@ -5,7 +5,7 @@ import { opciones } from '../Pages/Category'
 
 export default function Selector() {
   const [ displaySelector, setDisplaySelector ] = useState(false)
-  const { opcionSeleccionada, setOpcionSeleccionada } = useContext(AppContext);
+  const { opcionSeleccionada, setOpcionSeleccionada, toggleSelector } = useContext(AppContext);
   
   function cambioInput (event) {
     const { name, value, checked } = event.target
@@ -24,7 +24,7 @@ export default function Selector() {
   }
 
   return (
-    <div className='selector'>
+    <div className={`selector ${toggleSelector?'selectorLive':'selectorDead'}`}>
      
       {opciones.map(x=><div key={x.categoria} className={displaySelector?'openSelector':'closeSelector'}>
         <div className='flechaBajo'>
