@@ -11,6 +11,7 @@ import ProductDetails from './Componentes/Pages/ProductDetails';
 import Nosotros from './Componentes/Pages/Nosotros';
 import MiCuenta from './Componentes/Pages/MiCuenta'
 import Devoluciones from './Componentes/Pages/Devoluciones';
+import Loading from './Componentes/Pages/Loading';
 //componentes
 import Login from './Componentes/Componentes/Login'
 import Contacto from './Componentes/Componentes/Contacto';
@@ -79,7 +80,7 @@ function App() {
   };
   return(
     <AppContext.Provider  value={{ user, setLoading, setUser, products, setProducts, setShowModal, opcionSeleccionada, setOpcionSeleccionada, solesDolares, selectOptionsEstado, setSelectOptionsEstado, viewNavigate, estadoMarcas, setEstadoMarcas, toggleSelector, setToggleSelector }}>
-    {loading ? <h1>LOADING ...</h1> : <>
+    {loading ? <Loading /> : <>
     {pagoCompletadoPaypal ? null : (
       isCarritoPage?null: <><Navegador className={`${toggle?'navLive':'navDead'}`} />        <button onClick={modifyToggle} className='toggleButton'>☰</button></>
       )}
@@ -98,8 +99,8 @@ function App() {
           <Route path="/informacion/nosotros" element={<Nosotros tienda={tienda} src='https://st2.depositphotos.com/1389715/6027/i/600/depositphotos_60278103-stock-photo-brand-new-interior-of-cloth.jpg' />} />
           <Route path="/cambios-y-devoluciones" element={<Devoluciones />} />
           <Route path="/orden-completada" element={<PagoCompletadoPaypal />} />
-          <Route path='*' element={<NoMatch />} />
-          
+          <Route path='*' element={<NoMatch />} />  
+                 
         </Routes>
         {showModal && (
                   <div className="modelo">

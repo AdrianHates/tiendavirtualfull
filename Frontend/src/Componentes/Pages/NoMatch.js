@@ -1,13 +1,13 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 export default function NoMatch() {
   let location = useLocation();
   return (
-    <div>
-      <h3>
-        No match for <code>{location.pathname}</code>
-      </h3>
+      <div id='no-match'>
+      <h1>Oops! You seem to be lost.</h1>
+      <p>Here are some helpful links:</p>
+      <Link to='/'>Home</Link>
     </div>
   );
 }
