@@ -82,7 +82,7 @@ function App() {
     <AppContext.Provider  value={{ user, setLoading, setUser, products, setProducts, setShowModal, opcionSeleccionada, setOpcionSeleccionada, solesDolares, selectOptionsEstado, setSelectOptionsEstado, viewNavigate, estadoMarcas, setEstadoMarcas, toggleSelector, setToggleSelector }}>
     {loading ? <Loading /> : <>
     {pagoCompletadoPaypal ? null : (
-      isCarritoPage?null: <><Navegador className={`${toggle?'navLive':'navDead'}`} />        <button onClick={modifyToggle} className='toggleButton'>☰</button></>
+      isCarritoPage?null: <><Navegador className={`${toggle?'navLive':'navDead'}`} /><button onClick={modifyToggle} className='toggleButton'>☰</button></>
       )}
         <Routes>
           <Route exact path="/" element={<HomePage />} />
@@ -96,7 +96,7 @@ function App() {
           <Route path="/carrito" element={<Carrito />} />
           <Route path="/api/user/mi-cuenta" element={<MiCuenta />} />
           <Route path="/productos/:id" element={<ProductDetails />} />
-          <Route path="/informacion/nosotros" element={<Nosotros tienda={tienda} src='https://st2.depositphotos.com/1389715/6027/i/600/depositphotos_60278103-stock-photo-brand-new-interior-of-cloth.jpg' />} />
+          <Route path="/informacion/nosotros" element={<Nosotros tienda={tienda} src='https://img.freepik.com/fotos-premium/grandes-almacenes-gran-surtido-ropa_88135-23572.jpg?w=900' />} />
           <Route path="/cambios-y-devoluciones" element={<Devoluciones />} />
           <Route path="/orden-completada" element={<PagoCompletadoPaypal />} />
           <Route path='*' element={<NoMatch />} />  

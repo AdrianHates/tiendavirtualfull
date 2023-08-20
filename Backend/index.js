@@ -60,6 +60,12 @@ app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../Frontend/build/index.html'))
 })
 
+app.use((req, res, next) => {
+  res.status(404)
+    .type('text')
+    .send('Not Found')
+})
+
 app.listen(PORT, () => {
   console.log(`Servidor iniciado en puerto ${PORT}`)
 })

@@ -24,8 +24,14 @@ const productSchema = new mongoose.Schema({
     required: true
   },
   url: {
-    type: String,
-    required: true
+    type: [String], // Indica que es un array de strings
+    required: true,
+    validate: {
+      validator: function (urls) {
+        return urls.length === 4// Valida que el array de URLs tenga un máximo de 3 elementos
+      },
+      message: 'El array de URLs no puede tener más de 4 elementos'
+    }
   },
   stock: {
     type: Number,

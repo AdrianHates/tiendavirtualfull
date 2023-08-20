@@ -7,26 +7,26 @@
   margin: 3rem 0;
   & > div:first-of-type {
     width: 100%;
-    background-color: red;
     height: 27.5rem;
     overflow: hidden;
     position: relative;
+    & > div {
+      height: 100%;
+      background-size: cover;
+      background-position: center bottom;
+      background-image: url('https://img.freepik.com/fotos-premium/grandes-almacenes-gran-surtido-ropa_88135-23572.jpg?w=900');
     }
-  & > div:first-of-type > img {
-    width: 100%;
-    object-fit: cover;
-    min-width: 800px;
-    position: absolute;
-    top: -5rem
+      & > h2 {
+      position: absolute;
+      height: 100px;
+      top: 50%;
+      left: 7.5%;
+      color: var(--c-gris-1);
+      font-family: sans-serif;
+      font-weight: 700;    
+      }
     }
-    & > h2 {
-    position: absolute;
-    top: 13.25rem;
-    left: 7.5%;
-    color: var(--c-blanco-suave);
-    font-family: sans-serif;
-    font-weight: 700;    
-    }
+  
   & > div:nth-of-type(2) {
     padding: 2rem;
     text-align: center;

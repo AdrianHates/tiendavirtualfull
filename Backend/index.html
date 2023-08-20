@@ -34,8 +34,17 @@
         <input type="text" id="marca" name="marca" required>
       </div>
       <div>
-        <label for="url">url:</label>
-        <input type="text" id="url" name="url" required>
+        
+        <label for="url-part-1">URL Parte 1:</label>
+        <input type="text" id="url-part-1" name="url-part-1" required/>
+
+        <label for="url-part-2">URL Parte 2:</label>
+        <input type="text" id="url-part-2" name="url-part-2" required/>
+
+        <label for="url-part-3">URL Parte 3:</label>
+        <input type="text" id="url-part-3" name="url-part-3" required/>
+        <label for="url-part-3">URL Parte 4:</label>
+        <input type="text" id="url-part-4" name="url-part-4" required/>
       </div>
       <div>
         <label for="stock">Stock:</label>
@@ -57,7 +66,13 @@
         const category = form.category.value;
         const marca = form.marca.value;
         const stock = form.stock.value;
-        const url = form.url.value
+        const url = [
+      form['url-part-1'].value,
+      form['url-part-2'].value,
+      form['url-part-3'].value,
+      form['url-part-4'].value,
+
+    ];
 
         fetch('/admin/addProductos', {
           method: 'POST',

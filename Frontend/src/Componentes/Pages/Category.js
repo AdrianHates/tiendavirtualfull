@@ -61,11 +61,12 @@ function Category( { category } ) {
           viewNavigate(event,`/productos/${arreglo._id}`)
           
           }}>
-          <img src={arreglo.url} alt={arreglo.name} style={{viewTransitionName: `view-${arreglo._id}`}} />
+          <img src={arreglo.url[0]} alt={arreglo.name} style={{viewTransitionName: `view-${arreglo._id}`}} />
+          
           <div className='textoProductos'> 
             <p>Marca: {arreglo.marca}</p>
             <h5>{arreglo.name}</h5>
-            <p>Precio: {`${arreglo.price.toFixed(2)}`}</p>
+            <p>Precio: {`/S. ${arreglo.price.toFixed(2)}`}</p>
             <p>Stock: {arreglo.stock}</p>
           </div>
         </NavLink>

@@ -11,7 +11,12 @@ export default function HomePage () {
         <img src='https://topitop.vteximg.com.br/arquivos/wf_suscritbe.png?v=637919847774830000' alt='newsletter' />
         <NewsletterForm />
       </div>
-
+      <div className='ofertas'>
+        <img alt='ofertas1' src='https://topitop.vteximg.com.br/arquivos/230810_descanso_desktop_2.png?v=638272176554030000' />
+      </div>
+      <div>
+        <img alt='promo1' src='https://topitop.vteximg.com.br/arquivos/230817_descanso_desktop_1.png?v=638278202386100000' />
+      </div>
     </div>
   );
 };

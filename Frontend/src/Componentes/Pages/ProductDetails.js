@@ -3,12 +3,13 @@ import { NavLink, useParams } from 'react-router-dom';
 import { AppContext } from '../../App';
 import { promo, devoluciones } from '../Componentes/Variables';
 import { backendURL } from '../Componentes/Variables';
+import '../../styles/ProductDetails.css'
 
 function ProductDetails() {
   const { products, setUser } = useContext(AppContext);
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
-
+  const [imgActual, setImgActual] = useState(0)
   const product = products&&products.find(product => product._id === id)
 
   const handleAddToCart = async () => {
@@ -40,7 +41,15 @@ function ProductDetails() {
     {product&&<>
     <div className='detalles'>
       <div>
-      <img src={product.url} alt={product.name} style={{viewTransitionName: `view-${product._id}`}} />
+        <div className='mini-imagenes'>
+          {
+            product.url.map( (url,i) => <img key={i} src={url} alt={product.name} onClick={()=>{setImgActual(i)}} />)
+          }
+        </div>
+        <div>
+        
+          <img src={product.url[imgActual]} alt={product.name} style={{viewTransitionName: `view-${product._id}`}} />
+        </div>
       </div>
       <div style={{viewTransitionName: 'view-detalles'}}>
       <h4>{product.marca}</h4>

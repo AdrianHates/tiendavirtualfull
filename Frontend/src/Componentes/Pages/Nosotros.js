@@ -1,11 +1,15 @@
 import React from "react"
-import { FcComboChart } from "react-icons/fc"
+import { GiChart } from "react-icons/gi"
+import { GiAerialSignal } from "react-icons/gi"
+import { PiUsersThreeLight } from 'react-icons/pi'
+import { LiaUsersCogSolid } from "../../../node_modules/react-icons/lia";
 import "../../styles/Nosotros.css"
+
 function Nosotros( { src, tienda }) {
   return (
     <div id='nosotros'>
       <div>
-        <img src={src} alt={`Acerca de ${tienda}`} />
+        <div />
         <h2>{`Acerca de ${tienda}`}</h2>
       </div>
       <div>
@@ -16,19 +20,20 @@ function Nosotros( { src, tienda }) {
         <h1>Nuestros Valores</h1>
         <div>
           <div>
-          <FcComboChart />
+          <GiChart />
           <h3>Transparencia</h3>
           </div>
           <div>
-          <FcComboChart />
+          
+          <LiaUsersCogSolid />
           <h3>Responsabilidad</h3>
           </div>
           <div>
-          <FcComboChart />
+          <GiAerialSignal />
           <h3>Pasión</h3>
           </div>
           <div>
-          <FcComboChart />
+          <PiUsersThreeLight />
           <h3>Integridad</h3>
           </div>
         </div>
