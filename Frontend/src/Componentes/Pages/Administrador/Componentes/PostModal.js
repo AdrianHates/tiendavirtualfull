@@ -53,7 +53,7 @@ export default function PostModal ( { cerrarModal } ) {
       url:['', '', '', ''],
       stock: '',
     });
-    setActualizarProductos(!actualizarProductos)
+    setActualizarProductos((prevState) => !prevState);
   };
 
   return(

@@ -2,8 +2,6 @@ import './App.css';
 import React, { useState, useEffect, createContext } from 'react';
 import { flushSync } from 'react-dom';
 import { Routes, Route, useLocation, useNavigate, NavLink } from 'react-router-dom';
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer, toast } from 'react-toastify';
 
 //pages
 import HomePage from './Componentes/Pages/HomePage';
@@ -34,10 +32,13 @@ import NoMatch from './Componentes/Pages/NoMatch'
 //services
 import { getDataProductos } from './services/get';
 
-export const mensaje = () => {
-  toast('🦄 Productos Eliminados!', {
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+export const message = () => {
+  toast('🦄 Eliminando productos', {
   position: "top-right",
-  autoClose: 5000,
+  autoClose: 3000,
   hideProgressBar: false,
   closeOnClick: true,
   pauseOnHover: true,
@@ -67,9 +68,7 @@ function App() {
   const panelAdministrador = location.pathname.startsWith('/administrador')
   const pagoCompletadoPaypal = location.pathname === '/orden-completada'
   const navigate = useNavigate()
-  /*const [user, setUser] = useState({
-    rol: 'admin'
-  })*/
+  
   const modifyToggle = () => {
     setToggle(!toggle)
   }
@@ -132,6 +131,7 @@ function App() {
         {
           panelAdministrador && user && user.rol === 'admin' ?
           <><OptionsAdministrador /><ToastContainer />
+
           </>:
           null
         }

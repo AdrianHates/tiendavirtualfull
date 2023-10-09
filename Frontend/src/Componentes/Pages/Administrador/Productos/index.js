@@ -4,13 +4,13 @@ import CardProductos from "../Componentes/CardProductos";
 import PostModal from "../Componentes/PostModal";
 import { AppContext } from "../../../../App";
 import { deleteProducto } from "../../../../services/delete";
-import { mensaje } from "../../../../App";
+import { message } from "../../../../App";
 
 export default function Productos () {
   const { products, actualizarProductos, setActualizarProductos } = useContext(AppContext)
   const [postModal, setPostModal] = useState(false)
   const [elementosSeleccionados, setElementosSeleccionados] = useState([])
-
+  
   function formAgregarProductos () {
     setPostModal(true)
   }
@@ -21,8 +21,8 @@ export default function Productos () {
       await Promise.all(elementosSeleccionados.map(id => deleteProducto(id)));
       console.log('Elementos eliminados con éxito');
       setElementosSeleccionados([])
-      setActualizarProductos(!actualizarProductos)
-      mensaje()
+      setActualizarProductos((prevState) => !prevState);
+      message()
     } catch (error) {
       console.error('Error al eliminar elementos', error);
     }
