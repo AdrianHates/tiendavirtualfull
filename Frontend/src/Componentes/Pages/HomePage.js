@@ -14,7 +14,7 @@ export default function HomePage () {
       <div className='ofertas'>
         <img alt='ofertas1' src='https://topitop.vteximg.com.br/arquivos/230810_descanso_desktop_2.png?v=638272176554030000' />
       </div>
-      <div>
+      <div className='ofertas'>
         <img alt='promo1' src='https://topitop.vteximg.com.br/arquivos/230817_descanso_desktop_1.png?v=638278202386100000' />
       </div>
     </div>

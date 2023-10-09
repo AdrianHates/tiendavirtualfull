@@ -14,6 +14,9 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  beforePrice: {
+    type: Number
+  },
   category: {
     type: String,
     enum: ['Hombre', 'Mujer', 'Niño', 'Niña'],

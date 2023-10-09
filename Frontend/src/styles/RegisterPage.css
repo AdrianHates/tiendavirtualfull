@@ -1,0 +1,21 @@
+/*Registro*/
+
+#registro {
+  min-height: 85vh;
+}
+
+#registro > h1 {
+  margin: 5rem auto;
+}
+
+#registro > form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem
+}
+
+#registro > form > div {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}

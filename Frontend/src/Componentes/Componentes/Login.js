@@ -1,9 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { AppContext } from '../../App';
+import { BiSolidShow } from 'react-icons/bi'
 
 function Login( { backendURL } ) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState('')
   const { user, setUser, setShowModal } = useContext(AppContext);
 
 
@@ -52,11 +54,13 @@ function Login( { backendURL } ) {
       Contraseña:
       </label>
         <input
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           value={password}
           onChange={(event) => setPassword(event.target.value)}
         />
-      
+      <div onClick={() => {
+        setShowPassword(!showPassword)
+      }}><BiSolidShow /></div>
       </div>
       <button type="submit">Iniciar sesión</button>
     </form>

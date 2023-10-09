@@ -10,7 +10,7 @@ function ProductDetails() {
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
   const [imgActual, setImgActual] = useState(0)
-  const product = products&&products.find(product => product._id === id)
+  const product = products && products.find(product => product._id === id)
 
   const handleAddToCart = async () => {
     try {
@@ -54,7 +54,14 @@ function ProductDetails() {
       <div style={{viewTransitionName: 'view-detalles'}}>
       <h4>{product.marca}</h4>
       <h4>{product.name}</h4>
+      <div>
       <p><span>Precio: </span><span>{`S/ ${product.price.toFixed(2)}`}</span></p>
+      {
+        product.beforePrice? 
+        <p><span>Antes: </span><span>{`S/ ${product.beforePrice.toFixed(2)}`}</span></p>:
+        null
+      }
+      </div>
       <p>Stock: {product.stock}</p>
       <img src={promo} alt='promo' />
       <label>Cantidad:</label>

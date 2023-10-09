@@ -7,13 +7,16 @@ import { marcas } from '../Componentes/Variables'
 
 import SelectOptions from '../Componentes/SelectOpcions';
 
-export const opciones = [{
+export const opciones = [
+  {
   categoria: 'marca',
   opciones: marcas
- }]
+ }
+]
+
 
 function Category( { category } ) {
-  const { toggleSelector, setToggleSelector, products, selectOptionsEstado, viewNavigate, opcionSeleccionada, setEstadoMarcas } = useContext(AppContext);
+  const { puntoMinMax, toggleSelector, setToggleSelector, products, selectOptionsEstado, viewNavigate, opcionSeleccionada, setEstadoMarcas } = useContext(AppContext);
   
   function toggleSelecctorButton () {
     setToggleSelector(!toggleSelector)
@@ -30,6 +33,9 @@ function Category( { category } ) {
         return x.category === category
       }
     })
+    if(puntoMinMax) {
+    return filtro.filter(x => x.price >= puntoMinMax.min && x.price <= puntoMinMax.max)
+    }
     return filtro
   }
 
@@ -54,22 +60,37 @@ function Category( { category } ) {
 
   function showAll( array ) {
     console.log(array)
-    return array.map(arreglo => (
-      <div key={arreglo._id}>
-        <NavLink to={`/productos/${arreglo._id}`} onClick={(event)=>{
+    return array.map(producto => (
+      <div key={producto._id}>
+        <NavLink to={`/productos/${producto._id}`} onClick={(event)=>{
           setEstadoMarcas(false)
-          viewNavigate(event,`/productos/${arreglo._id}`)
+          viewNavigate(event,`/productos/${producto._id}`)
           
           }}>
-          <img src={arreglo.url[0]} alt={arreglo.name} style={{viewTransitionName: `view-${arreglo._id}`}} />
+          <img src={producto.url[0]} alt={producto.name} style={{viewTransitionName: `view-${producto._id}`}} />
           
           <div className='textoProductos'> 
-            <p>Marca: {arreglo.marca}</p>
-            <h5>{arreglo.name}</h5>
-            <p>Precio: {`/S. ${arreglo.price.toFixed(2)}`}</p>
-            <p>Stock: {arreglo.stock}</p>
+            <p>Marca: {producto.marca}</p>
+            <h5>{producto.name}</h5>
+           
+            <div>
+            <p>Precio: {`/S. ${producto.price.toFixed(2)}`}</p>
+            {
+              producto.beforePrice?
+              <p>Antes: {`/S. ${producto.beforePrice.toFixed(2)}`}</p>:
+              null
+            }
+            </div>
+            <p>Stock: {producto.stock}</p>
           </div>
         </NavLink>
+        {
+          producto.beforePrice?
+          <div>
+            -{Math.round((producto.beforePrice - producto.price) * 100 / producto.beforePrice)}%
+          </div>:
+          null
+        }
       </div>
     ))
   }
@@ -81,7 +102,9 @@ function Category( { category } ) {
       
       <div className='productos' style={{viewTransitionName: 'view-category'}}>
       
-      {products&&(opcionSeleccionada.length>0?showAll(filtradoSelectOptions(filtradoSelector(mostrarCategoría(products)))):showAll(filtradoSelectOptions(mostrarCategoría(products))))}    
+      {products && (opcionSeleccionada.length > 0 ?
+      showAll(filtradoSelectOptions(filtradoSelector(mostrarCategoría(products)))):
+      showAll(filtradoSelectOptions(mostrarCategoría(products))))}    
       </div>
       </div>
       <button className='toggleSelectorButton' onClick={toggleSelecctorButton}>Filtros</button>

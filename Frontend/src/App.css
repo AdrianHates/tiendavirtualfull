@@ -1,38 +1,41 @@
-:root {
-  --c-negro: black;
-  --c-naranja: orange;
-  --c-rojo: red;
-  --c-rojo-boton: #E2211C;
-  --c-celeste: skyblue;
-  --c-azul: blue;
-  --c-amarillo: yellow;
-  --c-green: green;
-  --c-mainHigh: #1d1d1d;
-  --c-mainMedium: #313131;
-  --c-mainLow: #404040;
-  --c-dorado: #efb810;
-  --c-Paypal: #ffc439;
-  --c-gris-1: #bdbdbd;
-  --c-blanco: white;
-  --c-blanco-suave: #F7F7F7;
-  --c-naranja1: #fda085;
-  --c-dorado-fino: #dd9933;
-  --gradiente1: linear-gradient(to right, #f6d365, #fda085);
-  --family-like: 'Montserrat'
+/*estilos generales*/
+
+
+#linkAdministrador {
+  padding: 1rem;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+#administrador {
+  background-color: var(--c-negro);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 150px;
+  min-height: 100vh;
+  height: 100%;
+  padding: .5rem 1rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 500;
+  & > a {
+    color: var(--c-gris-1)
+  }
 }
 
 #root {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  
+}
+
+#todo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  min-height: 100vh;
+
 }
 
 #loading {
@@ -44,11 +47,18 @@
 }
 
 #no-match {
-  padding: 2rem;
-  font-size: 1.25rem;
-  & > a {
-    text-decoration: underline;
-    color: violet
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  & > div {
+    padding: 2rem;
+    font-size: 1.25rem;
+    & > a {
+      text-decoration: underline;
+      color: violet
+  }
   }
 }
 
@@ -60,7 +70,32 @@ p {
   padding: 0; 
   margin: 0
 }
+/*Cualidades*/
 
+#cualidades {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 50px;
+}
+
+/*wasap*/
+#wasap {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  width: 75px;
+  height: 75px;
+  & > img {
+    width: 100%;
+    height: 100%;
+    transition: all .3s ease-in-out;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
 /*Nav*/
 .toggleButton {
   display: none
@@ -228,6 +263,8 @@ a {
   }
 }
 
+/*HomePage*/
+
 #homepage {
   padding-top: 1rem;
   width: 100%;
@@ -265,57 +302,59 @@ a {
   background-color: var(--c-gris-1);
   justify-content: center;
   align-items: center;
-  #newsletter {
-    padding: 1rem 2rem;
-    max-width: 550px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--c-gris-1);
-    & > form {
-        .newsletter1 {
-        margin-top: 1rem;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1.5rem;
-        align-items: flex-end;
-          & label {
-            font-style: italic;
-            font-weight: 600;
-          }
-        }
+  width: 100%;
+}
 
-        .newsletter2 {
-          display: flex;
-          gap: 0.5rem;
-          margin-top: 1rem;
-          align-items: center;
+#newsletter {
+  padding: 1rem 2rem;
+  max-width: 550px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--c-gris-1);
+  & > form {
+      .newsletter1 {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: flex-end;
+        & label {
+          font-style: italic;
+          font-weight: 600;
+        }
+      }
+
+      .newsletter2 {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        align-items: center;
+      }
+
+      & div {
+        & button {
+          height: 40px;
+          padding: 0 1.5rem;
+          border-radius: 1rem;
+          background-color: var(--c-mainHigh);
+          color: var(--c-blanco-suave);
+          font-weight: 500;
         }
 
         & div {
-          & button {
-            height: 40px;
-            padding: 0 1.5rem;
-            border-radius: 1rem;
-            background-color: var(--c-mainHigh);
-            color: var(--c-blanco-suave);
-            font-weight: 500;
+          display: flex;
+          flex-direction: column;
+          & input {
+            border: 1px solid black;
+            border-radius: .2rem;
+            padding: 0.2rem 0.5rem;
+            
           }
-
-          & div {
-            display: flex;
-            flex-direction: column;
-            & input {
-              border: 1px solid black;
-              border-radius: .2rem;
-              padding: 0.2rem 0.5rem;
-              
-            }
-          }
-
         }
+
       }
-  }
+    }
 }
 
 .negrita {
@@ -325,7 +364,7 @@ a {
 .subrayado {
   text-decoration: underline
 }
-/*Carrito*/
+/*Carrito--todo lo de abajo*/
 
 /*secuenciaCompra*/
 
@@ -493,20 +532,18 @@ a {
   justify-content: center;
   margin: 2rem auto;
   gap: 1.5rem;
+  & th {
+    text-align: center;
+    background-color: var(--c-blanco);
+    padding: 1rem 3rem;
+  }
   
-}
-
-th {
-  text-align: center;
-  background-color: var(--c-blanco);
-  padding: 1rem 3rem;
-}
-
-td {
-  background-color: var(--c-blanco);
-  text-align: center;
-  padding: 0.5rem 3rem;
-  border-bottom: 1px solid var(--c-blanco-suave)
+  & td {
+    background-color: var(--c-blanco);
+    text-align: center;
+    padding: 0.5rem 3rem;
+    border-bottom: 1px solid var(--c-blanco-suave)
+  }
 }
 
 .productoCarrito > td > button {
@@ -601,10 +638,45 @@ td {
       gap: .5rem;
       & svg {
         font-size: 2rem;
-      }      
+        cursor: pointer;;
+      }
+      & > svg:hover {
+        transform: scale(1.1);
+      }
+    }
+    
+  }
+  & > div:nth-of-type(4) {
+    gap: 2rem;
+    & > a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      & > img {
+        width: 80%;
+        height: 80%;
+        object-fit: contain;      
+      
+      }
+      &::before {
+        content: "";
+        position: absolute;
+        border-radius: .2rem;
+        top: 50%;
+        left: 50%;
+        width: 80%;
+        height: 100%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0,0,0,.4); 
+        opacity: 0; 
+        transition: opacity 0.3s; 
+      }
+      &:hover::before {
+        opacity: 1;
+      }
     }
   }
-  
 }
 
 /*Contacto*/
@@ -672,7 +744,7 @@ footer {
   font-family: var(--family-like);
 }
 
-/*Modal mi cuenta*/
+/*Modal mi cuenta - before login*/
 
 .modelo {
   position: fixed;
@@ -692,6 +764,19 @@ footer {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  & > div:nth-of-type(1) {
+    & > span {
+      cursor: pointer;
+      & > a {
+      color: purple;
+      font-weight: 500;
+      text-decoration: underline;
+      &:hover {
+        color: black
+      }
+      }
+    }
+  }
 }
 
 .close {
@@ -711,60 +796,7 @@ footer {
   cursor: pointer;
 }
 
-/*ingresar*/
-
-#ingresar {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--c-blanco);
-  border-radius: .2rem;
-  position: absolute;
-  top: 4rem;
-  right: -2.5rem;
-  padding: 1rem;
-  gap: 1rem;  
-  z-index: 10;
-  box-shadow: 1px 1px 5px 1px var(--c-gris-1);
-  font-size: 1rem;
-}
-
-#ingresar > button, #ingresar > a {
-  border: 1px solid var(--c-mainHigh);
-  padding: .15rem 1.5rem;
-  border-radius: .2rem;
-  background-color: var(--c-mainHigh);
-  color: var(--c-blanco);
-  width: 100%;
-}
-
-#ingresar > button:hover{
-  text-decoration: underline;
-}
-
-/*Registro*/
-
-#registro {
-  min-height: 85vh;
-}
-
-#registro > h1 {
-  margin: 5rem auto;
-}
-
-#registro > form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem
-}
-
-#registro > form > div {
-  display: flex;
-  flex-direction: column;
-  gap: .5rem;
-}
-
-
-/*Login*/
+/*Componente - Login*/
 
 #login {
   width: 300px;
@@ -777,15 +809,34 @@ footer {
 
 #loginEmail > input, #loginContrasena > input {
   border-radius: .2rem;
-  border: 1px solid var(--c-mainHigh);
+  border: 1px solid var(--c-gris-1);
   padding: .2rem
+}
+
+#loginContrasena {
+  position: relative;
+  & > div {
+    position: absolute;
+    right: 5px;
+    bottom: 2.5px;
+    & > svg {
+      height: 25px;
+      width: 25px;
+      color: var(--c-morado-claro);
+    }
+  }
 }
 
 #login > button {
   margin: 1rem auto;
-  padding: .25rem 2rem;
-  border-radius: 1rem;
-  
+  padding: .5rem 2rem;
+  border-radius: .2rem;
+  background-color: var(--c-morado-claro);
+  color: var(--c-blanco);
+  font-weight: 500;
+  border: none;
+  width: 100%;
+
 }
 
 /*pago completado*/
@@ -840,61 +891,8 @@ footer {
 }
 
 /*Perfil*/
-.perfil {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 0;
-  & > h3 {
-    padding: 2rem 0;
-  }
-  & > div {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    & > div {
-      display: flex;
-      gap: 1rem;
-      & > label {
-        width: 12.5rem;
-        font-weight: 500;
-      }
-    }
-    & > button:first-of-type {
-      background-color: var(--c-rojo);
-      border-radius: 1rem;
-      padding: .5rem;
-      border: none;
-      color: var(--c-blanco-suave);
-      font-weight: 500;
-        &:hover {   
-        box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.05)
-        }
-      }
-  }
-}
 
-#mi-cuenta-page {
-  display: flex;
-  flex-direction: column;
-  padding: 5rem 0;
-  & > ul {
-    display: flex;
-    list-style-type: none;
-    gap: 1rem;
-    & > li  button {
-      padding: .5rem 1rem;        
-      border-radius: .5rem .5rem 0% 0%;
-      border: none;
-      }    
-  }
-}
 
-.opcion-pedido-seleccionado {
-  background-color: var(--c-rojo);
-}
 
 @media (max-width: 1150px) {
   #resumenCompra {

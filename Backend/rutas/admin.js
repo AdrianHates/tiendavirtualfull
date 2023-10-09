@@ -1,15 +1,10 @@
 import { Router } from 'express'
 import Product from '../esquemas/products.js'
-import path, { dirname } from 'path'
-import { fileURLToPath } from 'url'
 const router = Router()
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
-
 router.post('/addProductos', (req, res) => {
-  const { name, description, price, category, marca, url, stock } = req.body
-  const newProduct = new Product({ name, description, price, category, marca, url, stock })
+  const productData = req.body
+  const newProduct = new Product(productData)
   newProduct.save()
     .then(product => {
       res.send(product)
@@ -19,16 +14,20 @@ router.post('/addProductos', (req, res) => {
     })
 })
 
-router.get('/addProductos', checkAdmin, (req, res) => {
-  res.sendFile(path.join(__dirname, '../index.html'))
-})
+router.put('/updateProductos/:id', (req, res) => {
+  try {
+    const productId = parseInt(req.params.id)
+    const updatedProductData = req.body
 
-function checkAdmin (req, res, next) {
-  if (req.user && req.user.rol === 'admin') {
-    next()
-  } else {
-    res.status(401).send('No tienes acceso a esta página')
+    const updatedProduct = Product.findByIdAndUpdate(productId, updatedProductData, { new: true })
+    if (!updatedProduct) {
+      return res.status(404).json({ message: 'Producto no encontrado' })
+    }
+    res.json({ message: 'Producto actualizado exitosamente', product: updatedProduct })
+  } catch (error) {
+    console.error('Error al actualizar el producto:', error)
+    res.status(500).json({ message: 'Error al actualizar el producto' })
   }
-}
+})
 
 export default router

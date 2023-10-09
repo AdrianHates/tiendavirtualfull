@@ -15,6 +15,7 @@
   }
   & > div {
     padding: 2rem;
+
     &:first-of-type {
       flex: 6;
       display: flex;
@@ -27,43 +28,49 @@
         overflow: hidden;
         width: 25rem;
         object-fit: contain;
-        & img {
+        & > img {
           width: 100%;
         }
+
       }      
     
     &:nth-of-type(2) {
+
       flex: 4;
       display: flex;
       flex-direction: column;
       gap: 1rem;
       & h4:first-of-type {
         font-weight: 400;
+
       }
 
-      & p {        
-        &:nth-of-type(2), &:nth-of-type(3) {
-          display: flex;
-          justify-content: space-between;
-          border-bottom: 1px solid var(--c-gris-1);
-          & span {
-            font-size: 1.25rem;
-          }
+      & > div:nth-of-type(1) {
+        display: flex;
+        justify-content: space-between;
+        & > p:nth-of-type(2) {
+          background: linear-gradient(5deg, var(--c-negro) 25%, transparent 25%, transparent 58%, var(--c-negro) 60%, var(--c-negro) 62%, transparent 63%, transparent);
+          background-size: 100% 150%;       
         }
+      }
+      & > p {
+        border-bottom: 1px solid var(--c-gris-1);
       }
       & img {
         width: 100%;
       }
-      & label, p:nth-of-type(3), p:nth-of-type(2) {
+      & label, > p:nth-of-type(1) {
         font-weight: 500;
         
       }
-      & div {
+      & > div:nth-of-type(2) {
         display: flex;
+        width: 100%;
         justify-content: flex-start;
         align-items: center;
         gap: .25rem;
         padding: .5rem;
+        
         & input {
           width: 4rem;
           height: 3rem;

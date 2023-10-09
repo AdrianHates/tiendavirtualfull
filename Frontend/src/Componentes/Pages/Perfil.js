@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { AppContext } from '../../App'
-
+import '../../styles/Perfil.css'
 function Perfil () {
   const { user, setUser } = useContext(AppContext);
 

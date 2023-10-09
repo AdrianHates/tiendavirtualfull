@@ -7,7 +7,7 @@ import Logo from '../Componentes/Logo';
 import { HiArrowLongLeft } from 'react-icons/hi2'
 import { backendURL } from '../Componentes/Variables';
 import { iconoPaypalButton, paypalButton } from '../../svg/iconos';
-
+import { mensaje } from '../../App';
 function Inicial () {
   return(
     <div>      

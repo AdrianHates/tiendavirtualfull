@@ -46,6 +46,9 @@ function Informacion( { tienda } ) {
           <FaYoutubeSquare />
           <BsLinkedin />
         </div>
+        <NavLink to='/libro-reclamaciones'>
+          <img src='https://topitop.vteximg.com.br/arquivos/libro.png?v=638234858971470000' />
+          </NavLink>
       </div>
     </div>
     

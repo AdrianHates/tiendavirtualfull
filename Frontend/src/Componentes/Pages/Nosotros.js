@@ -1,4 +1,5 @@
 import React from "react"
+import NewsletterForm from '../Componentes/NewsletterForm'
 import { GiChart } from "react-icons/gi"
 import { GiAerialSignal } from "react-icons/gi"
 import { PiUsersThreeLight } from 'react-icons/pi'
@@ -7,6 +8,7 @@ import "../../styles/Nosotros.css"
 
 function Nosotros( { src, tienda }) {
   return (
+    <>
     <div id='nosotros'>
       <div>
         <div />
@@ -38,7 +40,13 @@ function Nosotros( { src, tienda }) {
           </div>
         </div>
       </div>
-    </div>)
+    </div>
+    <div id='newsletterContenedor'>
+        <img src='https://topitop.vteximg.com.br/arquivos/wf_suscritbe.png?v=637919847774830000' alt='newsletter' />
+        <NewsletterForm />
+    </div>
+    </>
+    )
 }
 
 export default Nosotros

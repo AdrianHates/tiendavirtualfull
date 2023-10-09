@@ -1,3 +1,53 @@
+:root {
+  --c-main: rgb(129, 31, 31);
+  --c-black: #1c1c1c;
+  --c-sky: #4e89a7;
+  --c-fondo-sky: #316e8c;
+  --c-fondo-sky-transparent: #316e8c9a;
+  --c-negro: black;
+  --c-negro-transparent: rgba(0, 0, 0, 0.3);
+  --c-Paypal: #ffc439;
+  --c-transparent: transparent;
+  --c-naranja: orange;
+  --c-rojo-light: rgb(255, 31, 31);
+  --c-rojo: red;
+  --c-rojo-boton: #E2211C;
+  --c-celeste: skyblue;
+  --c-azul: blue;
+  --c-amarillo: yellow;
+  --c-green: green;
+  --c-mainHigh: #1d1d1d;
+  --c-mainMedium: #313131;
+  --c-mainLow: #404040;
+  --c-dorado: #efb810;
+  --c-dorado-button: #febe10;
+  --c-Paypal: #ffc439;
+  --c-gris-light: #ccc;
+  --c-gris-1: #bdbdbd;
+  --c-gris-suave: #616161;
+  --c-blanco-fuerte: #e3e3e3;
+  --c-blanco: white;
+  --c-blanco-suave: #F7F7F7;
+  --c-naranja1: #fda085;
+  --c-dorado-fino: #dd9933;
+  --gradiente1: linear-gradient(to right, #f6d365, #fda085);
+  --c-negro-navegador-letter: #333;
+  --c-negro-landing-page: #121215;
+  --c-negro-landing-page-0: #17171b;
+  --c-azul-facebook: #3b5998;
+  --c-azul-linkedin: rgb(0, 125, 189);
+  --c-morado-claro: #6747c7;
+  --c-morado: purple;
+  --family-like: 'Montserrat';
+
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,6 +60,70 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.custom-btn {
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+  7px 7px 20px 0px rgba(0,0,0,.1),
+  4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+
+.btn-9 {
+  border: none;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+.btn-9:after {
+  position: absolute;
+  content: " ";
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1fd1f9;
+  background-image: linear-gradient(315deg, #1fd1f9 0%, #b621fe 74%);
+  transition: all 0.3s ease;
+}
+.btn-9:hover {
+  background: transparent;
+  box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+              -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.5),
+    inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
+  color: #fff;
+}
+.btn-9:hover:after {
+  -webkit-transform: scale(2) rotate(180deg);
+  transform: scale(2) rotate(180deg);
+  box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+              -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.5),
+    inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
+}
+
+.button-standar-admin-black {
+  background-color: #303030;
+  color: white;
+  font-weight: 700;
+  padding: .5rem;
+  border-radius: .4rem;
+  font-family: "Inter",-apple-system,BlinkMacSystemFont,"San Francisco","Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+  &:hover {
+    color: var(--c-gris-light)
+  }
 }
 
 @keyframes fade-in {

@@ -13,11 +13,14 @@ import { PORT, SECRET } from './config.js'
 
 import userRoutes from './rutas/user.js'
 import getRouter from './rutas/get.js'
+import deleteRoutes from './rutas/delete.js'
 import authRouter from './rutas/auth.js'
 import adminRouter from './rutas/admin.js'
 import cartRouter from './rutas/cart.js'
 import paymentRoutes from './rutas/payment.routes.js'
 import cambio from './api/Cambio.js'
+// rutas administrador
+import administradorRoutes from './Administrador/rutas/administrador.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -52,9 +55,11 @@ app.use('/', cambio)
 app.use('/api/users', userRoutes)
 app.use('/api/user', authRouter)
 app.use('/api/get', getRouter)
+app.use('/api/delete', deleteRoutes)
 app.use('/admin', adminRouter)
 app.use('/api', cartRouter)
 app.use('/', paymentRoutes)
+app.use('/administrador', administradorRoutes)
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../Frontend/build/index.html'))

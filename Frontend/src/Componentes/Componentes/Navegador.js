@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import { AppContext } from '../../App';
 import { AiFillShopping } from 'react-icons/ai'
 import { userLogin, userPerfil } from '../../svg/iconos';
@@ -10,7 +10,6 @@ import { useLocation } from 'react-router-dom';
 
 export default function Navegador( {className} ) {
 
-  const [mostrar, setMostrar] = useState(false);
   const { setOpcionSeleccionada, setShowModal, user, viewNavigate, estadoMarcas, setEstadoMarcas } = useContext(AppContext)
   const location = useLocation()
   function resetAll (){
@@ -22,14 +21,6 @@ export default function Navegador( {className} ) {
     });
     }
     setEstadoMarcas(false)
-  }
-
-  function metodoMostrar() {
-    if(mostrar) {
-      setMostrar(false)
-    } else {
-      setMostrar(true)
-    }
   }
 
   const handleShowModal = () => {
@@ -48,7 +39,6 @@ export default function Navegador( {className} ) {
   const sumarCantidades = (user) => {
     return user && user.carts && user.carts.items ? user.carts.items.reduce((total, item) => total + (item.quantity), 0) : 0;
   };
-  console.log(location.pathname)
   return (
     
     <nav id='nav' className={className}>
@@ -56,6 +46,8 @@ export default function Navegador( {className} ) {
             <li>
               <Logo />
             </li>
+            
+
             <li>
               <ul>
                 <li>
@@ -91,29 +83,28 @@ export default function Navegador( {className} ) {
               </ul>
             </li>
             <BuscarProductos />            
-            <ul>              
+            <ul>
+              { user && user.rol==='admin'? 
+                <Link id='linkAdministrador' to={'/administrador'}>
+                  Admin
+                </Link> :
+                null 
+              }             
               {user ? 
                 <NavLink to='/api/user/mi-cuenta' id='mi-cuenta' onClick={()=>{
                   setEstadoMarcas(false)
                 }}>
                   <div>                  
-                  <div className='iconMiCuenta'>{userPerfil}</div>
-                 
-                  <div>Mi perfil</div>
+                    <div className='iconMiCuenta'>{userPerfil}</div>
+                  
+                    <div>Mi perfil</div>
                   </div>
                 </NavLink> :
-              <li id='miCuenta' onClick={metodoMostrar}>
+              <li id='miCuenta' onClick={handleShowModal}>
                 <div>                  
                   <div className='iconMiCuenta'>{userLogin}</div>
-                  <div>Mi cuenta</div>
+                  <div>Iniciar Sessión</div>
                 </div>
-                {mostrar &&
-                (<div id='ingresar'>                  
-                  <button onClick={handleShowModal}>Login</button>     
-                  <NavLink to='/api/users/register'>
-                    Register
-                  </NavLink>
-                </div>)}
               </li>}
               <li>
                 <NavLink to="/carrito">
