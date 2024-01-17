@@ -70,32 +70,7 @@ p {
   padding: 0; 
   margin: 0
 }
-/*Cualidades*/
 
-#cualidades {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  padding: 50px;
-}
-
-/*wasap*/
-#wasap {
-  position: fixed;
-  right: 15px;
-  bottom: 15px;
-  width: 75px;
-  height: 75px;
-  & > img {
-    width: 100%;
-    height: 100%;
-    transition: all .3s ease-in-out;
-    &:hover {
-      transform: scale(1.1);
-    }
-  }
-}
 /*Nav*/
 .toggleButton {
   display: none
@@ -289,81 +264,6 @@ a {
   pointer-events: none;
 }
 
-/*Carrusel*/
-
-.w-100 {
-  object-fit: contain;
-}
-
-/*Newsletter*/
-#newsletterContenedor {
-  display: flex;
-  flex-wrap: wrap;
-  background-color: var(--c-gris-1);
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-#newsletter {
-  padding: 1rem 2rem;
-  max-width: 550px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--c-gris-1);
-  & > form {
-      .newsletter1 {
-      margin-top: 1rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      align-items: flex-end;
-        & label {
-          font-style: italic;
-          font-weight: 600;
-        }
-      }
-
-      .newsletter2 {
-        display: flex;
-        gap: 0.5rem;
-        margin-top: 1rem;
-        align-items: center;
-      }
-
-      & div {
-        & button {
-          height: 40px;
-          padding: 0 1.5rem;
-          border-radius: 1rem;
-          background-color: var(--c-mainHigh);
-          color: var(--c-blanco-suave);
-          font-weight: 500;
-        }
-
-        & div {
-          display: flex;
-          flex-direction: column;
-          & input {
-            border: 1px solid black;
-            border-radius: .2rem;
-            padding: 0.2rem 0.5rem;
-            
-          }
-        }
-
-      }
-    }
-}
-
-.negrita {
-  font-weight: 700;
-}
-
-.subrayado {
-  text-decoration: underline
-}
 /*Carrito--todo lo de abajo*/
 
 /*secuenciaCompra*/
@@ -594,89 +494,6 @@ a {
   font-size: 1.2rem;
   font-weight: 500;
 
-}
-
-/*Informacion*/
-
-#informacion {
-  display: flex;
-  background-color: var(--c-blanco-suave);
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.5rem;
-  align-items: flex-start;
-  width: 100%;
-  padding: 2rem;
-  & div:nth-of-type(2) {
-    & > div > div {
-      display: flex;
-      flex-direction: column;
-      font-family: var(--family-like);
-    }
-  }
-  & div:last-of-type > h5 {
-    text-align: center;
-  }
-  & div {
-    width: 200px;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    & h5 {
-      font-weight: 700;
-    }
-
-    & ul {
-      list-style-type: none;
-      padding: 0;
-      font-family: var(--family-like);
-    }
-
-    & div {
-      display:flex;
-      flex-direction: row;
-      gap: .5rem;
-      & svg {
-        font-size: 2rem;
-        cursor: pointer;;
-      }
-      & > svg:hover {
-        transform: scale(1.1);
-      }
-    }
-    
-  }
-  & > div:nth-of-type(4) {
-    gap: 2rem;
-    & > a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      & > img {
-        width: 80%;
-        height: 80%;
-        object-fit: contain;      
-      
-      }
-      &::before {
-        content: "";
-        position: absolute;
-        border-radius: .2rem;
-        top: 50%;
-        left: 50%;
-        width: 80%;
-        height: 100%;
-        transform: translate(-50%, -50%);
-        background-color: rgba(0,0,0,.4); 
-        opacity: 0; 
-        transition: opacity 0.3s; 
-      }
-      &:hover::before {
-        opacity: 1;
-      }
-    }
-  }
 }
 
 /*Contacto*/

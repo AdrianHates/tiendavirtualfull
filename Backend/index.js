@@ -48,7 +48,7 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use(express.static(path.join(__dirname, '../Frontend/build/')))
+app.use(express.static(path.join(__dirname, '../Frontend/dist/')))
 
 // Usando rutas
 app.use('/', cambio)
@@ -62,7 +62,7 @@ app.use('/', paymentRoutes)
 app.use('/administrador', administradorRoutes)
 
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../Frontend/build/index.html'))
+  res.sendFile(path.join(__dirname, '../Frontend/dist/index.html'))
 })
 
 app.use((req, res, next) => {

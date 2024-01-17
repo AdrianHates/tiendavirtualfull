@@ -1,0 +1,29 @@
+.carousel {
+  /*container of indicators*/
+  .carousel-indicators {
+    height: 100%;
+    display: flex !important;
+    align-items: flex-end;
+    margin-bottom: 0;
+    button {
+      height: 4% !important;
+      width: unset;     
+      aspect-ratio: 1 !important;
+      border-radius: 50%;
+    }
+    .active {
+      background-color: red;
+    }
+  }
+  /*arrows*/
+  a {
+    width: unset;
+    opacity: unset;
+    & span {
+      border-radius: 5px !important;
+      outline: 4px solid black !important;
+      background-color: black !important;
+      opacity: 1;
+    }
+  }
+}

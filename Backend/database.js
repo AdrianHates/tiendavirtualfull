@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import { MONGODB_URI } from './config.js';
+import mongoose from 'mongoose'
+import { MONGODB_URI } from './config.js'
 
 export const database = async () => {
   try {
