@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from 'react'
-import { AppContext } from '../../App';
+import { AppContext } from '../../../App';
 import { SlArrowDown } from 'react-icons/sl'
-import { opciones } from '../Pages/Category'
-
+import { opciones } from '../../Pages/Category'
+import './Selector.css'
 
 
 export default function Selector() {
@@ -116,7 +116,7 @@ export default function Selector() {
             abrirSelector("precio")
           }} />
         </div>
-        <div>        S/.{puntoMinMax && puntoMinMax.min} - S/.{puntoMinMax && puntoMinMax.max}
+        <div>        S/ {puntoMinMax && puntoMinMax.min} - S/ {puntoMinMax && puntoMinMax.max}
 </div>
         <div id="contenedor-sphere"
         onDragStart={(e) => e.preventDefault()}

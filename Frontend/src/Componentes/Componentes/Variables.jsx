@@ -3,7 +3,7 @@ export const promo = '/promo.jpg'
 export const devoluciones = '/devoluciones.jpg'
 
 export const tienda = 'FastestStore'
-export const backendURL = ''
+export const backendURL = 'http://localhost:5000'
 export const wS = '51914315964'
 export const information = [
   {

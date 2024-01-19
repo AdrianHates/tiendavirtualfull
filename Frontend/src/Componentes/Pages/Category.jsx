@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import '../../styles/Category.css'
-import Selector from '../Componentes/Selector';
+import Selector from '../Componentes/Selector/Selector';
 import { AppContext } from '../../App';
 import { NavLink } from 'react-router-dom';
 import { marcas } from '../Componentes/Variables'
@@ -74,10 +74,10 @@ function Category( { category } ) {
             <h5>{producto.name}</h5>
            
             <div>
-            <p>Precio: {`/S. ${producto.price.toFixed(2)}`}</p>
+            <p>Precio: {`S/ ${producto.price.toFixed(2)}`}</p>
             {
               producto.beforePrice?
-              <p>Antes: {`/S. ${producto.beforePrice.toFixed(2)}`}</p>:
+              <p>Antes: {`S/ ${producto.beforePrice.toFixed(2)}`}</p>:
               null
             }
             </div>

@@ -7,74 +7,11 @@
   margin: 100px 0;
   padding: 0rem 2rem;
   gap: 2rem;  
-  .selector {
-    padding: .5rem 0;
-    width: 300px;
-    & > div {
-      & > div:first-of-type {
-
-        & > svg {
-
-          cursor: pointer !important;
-        }
-      }
-    }
-    & > div:first-of-type {
-      display: flex;
-      flex-direction: column;    
-      gap: .3rem;   
-      border-bottom: 1px solid var(--c-gris-1);
-      padding-bottom: 1rem;
-
-      
-      }
-    & > div:nth-of-type(2) {
-      border-bottom: 1px solid var(--c-gris-1);
-      gap: 1rem;
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-      font-weight: 700;
-      padding-bottom: 1rem;
-      /*contenedor-sphere*/
-      & > div:nth-of-type(3) { 
-        position: relative;
-        background-color: var(--c-negro);
-        border-radius: 5px;
-        height: 5px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        & > div:first-of-type {
-        position: absolute;
-        left: 0;
-        width: 15px;
-        height: 15px;
-        background-color: white;
-        border: 1px solid black;
-        border-radius: 50%;
-        
-        }
-        & > div:nth-of-type(2) {
-          position: absolute;
-
-          right: 0;
-          width: 15px;
-          height: 15px;
-          background-color: white;
-          border: 1px solid black;
-          border-radius: 50%;
-        }
-      }
-    }
-  }
   & > #select-options {
     position: absolute;
     right: 2rem;
     top: 8rem
   }
-  
 }
 
 #contenedor-sphere {
@@ -93,14 +30,7 @@
   font-size: .9rem;
   display: flex;
   flex-direction: row;
-  gap: .2rem;
-  
-}
-
-.closeSelector {
-  height: 1.5rem;
-  overflow: hidden;
-  
+  gap: .2rem;  
 }
 
 .productosContenedor {
@@ -162,6 +92,7 @@
   }
   .selector.selectorLive {
     display: flex;
+    flex-direction: column;
     position: fixed;
     z-index: 999;
     background-color: var(--c-blanco-suave);

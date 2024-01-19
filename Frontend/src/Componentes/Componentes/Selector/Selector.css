@@ -1,0 +1,77 @@
+.selector {
+  padding: .5rem 0;
+  width: 300px;
+  & > div {
+    transition: height .1s ease-in-out;
+
+    & > div:first-of-type {
+
+      & > svg {
+        cursor: pointer;
+      }
+    }
+  }
+
+  > div:first-of-type {
+    display: flex;
+    flex-direction: column;    
+    gap: .3rem;   
+    border-bottom: 1px solid var(--c-gris-1);
+    padding-bottom: 1rem;
+
+    }
+
+  .openSelector {
+    height: 7rem;
+  }
+
+  > div:nth-of-type(2) {
+    border-bottom: 1px solid var(--c-gris-1);
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-weight: 700;
+    padding-bottom: 1rem;
+    /*contenedor-sphere*/
+    & > div:nth-of-type(3) { 
+      
+      position: relative;
+      background-color: var(--c-negro);
+      border-radius: 5px;
+      height: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      & > div:first-of-type {
+        
+      position: absolute;
+      left: 0;
+      width: 15px;
+      height: 15px;
+      background-color: white;
+      border: 1px solid black;
+      border-radius: 50%;
+      cursor: pointer;
+
+      }
+      & > div:nth-of-type(2) {
+        position: absolute;
+        cursor: pointer;
+
+        right: 0;
+        width: 15px;
+        height: 15px;
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+.closeSelector {
+  height: 1.5rem;
+  overflow: hidden;
+}

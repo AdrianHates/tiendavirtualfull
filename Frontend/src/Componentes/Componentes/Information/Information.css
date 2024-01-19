@@ -38,7 +38,8 @@
       gap: .5rem;
       & svg {
         font-size: 2rem;
-        cursor: pointer;;
+        cursor: pointer;
+        transition: transform .3s ease-in-out;
       }
       & > svg:hover {
         transform: scale(1.1);
