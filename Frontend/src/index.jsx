@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-import Scroll from './Componentes/Componentes/Scroll';
+import Scroll from './components/Scroll';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

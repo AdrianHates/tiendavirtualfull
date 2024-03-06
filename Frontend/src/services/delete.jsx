@@ -1,4 +1,4 @@
-import { backendURL } from "../Componentes/Componentes/Variables";
+import { backendURL } from "../components/Variables";
 
 const requestOptions = {
   method: 'DELETE',

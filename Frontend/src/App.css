@@ -1,6 +1,7 @@
 /*estilos generales*/
 
 
+
 #linkAdministrador {
   padding: 1rem;
 }
@@ -18,7 +19,8 @@
   padding: .5rem 1rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 500;
-  & > a {
+
+  &>a {
     color: var(--c-gris-1)
   }
 }
@@ -35,7 +37,12 @@
   justify-content: flex-end;
   width: 100%;
   min-height: 100vh;
+}
 
+.routes-container {
+  max-width: 1536px;
+  width: 100%;
+  position: relative;
 }
 
 #loading {
@@ -52,13 +59,15 @@
   align-items: center;
   justify-content: center;
   display: flex;
-  & > div {
+
+  &>div {
     padding: 2rem;
     font-size: 1.25rem;
-    & > a {
+
+    &>a {
       text-decoration: underline;
       color: violet
-  }
+    }
   }
 }
 
@@ -67,188 +76,8 @@ ul {
 }
 
 p {
-  padding: 0; 
+  padding: 0;
   margin: 0
-}
-
-/*Nav*/
-.toggleButton {
-  display: none
-}
-
-#nav {
-  width: 100%;
-  position: sticky;
-  top: 0;
-  z-index: 999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-top: 1px solid var(--c-blanco-suave);
-  border-bottom: 1px solid var(--c-blanco-suave);
-  height: 4.1rem;
-  & > div {
-    position: absolute;
-    top: 4rem;
-    left: 0;
-    padding: 1rem 0;
-    width: 100%;
-    background-color: var(--c-blanco);
-    box-shadow: 0px 0px 2.5px 0px var(--c-gris-1);
-  }
-  & > div > div {
-    display: flex;
-    margin: 0 auto;
-    width: 100%;
-    max-width: 1500px;
-    justify-content: space-around;
-    & > a {
-      font-weight: 500;
-    }
-  }
-}
-
-a {
-  text-decoration: none;
-  color: var(--c-mainHigh);
-  &:hover {  
-  text-decoration: underline;
-  color: var(--c-mainHigh);
-  }
-}
-
-#nav > ul {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  list-style-type: none;
-  justify-content: space-around;
-  background-color: var(--c-blanco);
-  max-width: 1500px;
-  gap: 1rem;
-  margin: 0;
-  width: 100%;
-  & > li:first-of-type {
-    height: 4rem;
-    width: 7.5rem;
-    overflow: hidden;
-    & > a {
-      & > svg {
-        height: 5rem;
-        width: 7.5rem;
-      }
-    }
-  }
-  & > li:nth-of-type(2) > ul {
-      list-style-type: none;
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      justify-content: center;
-      & > li > a {
-      text-decoration: none;
-      padding: .2rem 0;
-      &:hover {  
-        border-bottom: .1rem solid var(--c-dorado-fino);
-      }
-    }
-  }
-  & > ul {
-    list-style-type: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: .65rem;
-    
-    & li {
-      padding: .5rem;
-      border-right: 1px solid var(--c-blanco-suave);
-        
-    }
-    & li:nth-of-type(2) svg {
-      font-size: 2rem;
-    }
-    & li:nth-of-type(1) svg {
-      font-size: 2rem;
-    }
-  }
-  & > div {
-    position: relative;
-    width: 25%;
-    & input {
-      padding: .25rem;
-      width: 100%;
-      border: 1px solid var(--c-mainHigh); 
-    }
-    & > ul {
-      position: absolute;
-      width: 100%;
-      list-style-type: none;
-      background-color: var(--c-blanco);
-      border: none;
-      border-radius: .1rem;
-      box-shadow: 0px 0px 4px 0px black;
-      z-index: 999;
-      & li {
-        padding: .5rem;
-        cursor: pointer;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        &:hover {
-          background-color: var(--c-blanco-suave);
-        }
-      }
-    }
-  }
-}
-
-#miCuenta {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  cursor: pointer;
-  border-left: 1px solid var(--c-blanco-suave);
-  position: relative;
-  & > div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    
-  }
-}
-
-#mi-cuenta {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  padding: .5rem;
-  border-left: 1px solid var(--c-blanco-suave);
-  border-right: 1px solid var(--c-blanco-suave); 
-}
-
-.iconMiCuenta {
-  width: 100%; 
-  fill: var(--c-gris-1);
-  color: var(--c-gris-1);
-  &:first-of-type {
-    font-size: 1.3rem;
-  }
-}
-
-/*HomePage*/
-
-#homepage {
-  padding-top: 1rem;
-  width: 100%;
-  .ofertas {
-    padding: 50px 0;
-    & img {
-      width: 100%;
-    };
-  }
 }
 
 .reactive {
@@ -299,8 +128,8 @@ a {
   .compraDescripcion {
     color: var(--c-mainHigh);
     font-weight: 500;
-  } 
- 
+  }
+
 }
 
 .pasoCompra {
@@ -313,7 +142,7 @@ a {
 .compraDescripcion {
   width: 150px;
   font-size: 1rem;
-  
+
 }
 
 /*Carrito-detalles*/
@@ -326,27 +155,30 @@ a {
   justify-content: space-between;
   font-size: 1rem;
   overflow: hidden;
-  & > div:first-of-type {
+
+  &>div:first-of-type {
     margin-left: 2rem;
     width: 7.5rem;
     height: 3rem;
-    }
-    & > div:first-of-type > a > svg {
-      height: 5rem;
-      width: 7.5rem;
-      background-color: transparent;
-      & > rect {
-        fill: transparent;
-      }    
   }
-  
+
+  &>div:first-of-type>a>svg {
+    height: 5rem;
+    width: 7.5rem;
+    background-color: transparent;
+
+    &>rect {
+      fill: transparent;
+    }
+  }
+
   & div {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
     & h5 {
-    margin: 0
+      margin: 0
     }
   }
 }
@@ -357,14 +189,14 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
   & a {
-  color: var(--c-blanco);
-  font-weight: 900;
- 
+    color: var(--c-blanco);
+    font-weight: 900;
+
     & svg {
       font-size: 2rem;
-      
+
     }
   }
 }
@@ -392,10 +224,10 @@ a {
   background-color: var(--c-rojo-boton);
   color: var(--c-blanco);
   border-radius: .2rem;
-  
+
   &:hover {
-  text-decoration: none;
-  background-color: var(--c-dorado);
+    text-decoration: none;
+    background-color: var(--c-dorado);
   }
 }
 
@@ -407,6 +239,7 @@ a {
   color: var(--c-blanco);
   border-radius: .2rem;
 }
+
 #paypalButton:hover {
   box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.05)
 }
@@ -414,13 +247,14 @@ a {
 .imagenProductoCarrito {
   height: 150px;
   object-fit: contain;
-  
+
 }
 
-.productoCarrito > td:first-of-type {
+.productoCarrito>td:first-of-type {
   font-weight: 500;
   width: 300px;
-  & p:nth-of-type(2){
+
+  & p:nth-of-type(2) {
     margin-bottom: 1rem;
     font-weight: 400;
   }
@@ -432,12 +266,13 @@ a {
   justify-content: center;
   margin: 2rem auto;
   gap: 1.5rem;
+
   & th {
     text-align: center;
     background-color: var(--c-blanco);
     padding: 1rem 3rem;
   }
-  
+
   & td {
     background-color: var(--c-blanco);
     text-align: center;
@@ -446,7 +281,7 @@ a {
   }
 }
 
-.productoCarrito > td > button {
+.productoCarrito>td>button {
   border: none;
   background-color: var(--c-blanco);
   text-decoration: underline;
@@ -472,7 +307,7 @@ a {
   width: 20rem;
 }
 
-#resumenCompra > #resumenTitulo {
+#resumenCompra>#resumenTitulo {
   border-top: solid 1px var(--c-mainHigh);
   font-weight: 500;
   font-size: 1.2rem;
@@ -480,7 +315,7 @@ a {
   width: 100%
 }
 
-#resumenCompra > #total {
+#resumenCompra>#total {
   border-bottom: solid 1px var(--c-mainHigh);
   font-weight: 100;
   font-size: 1.2rem;
@@ -499,7 +334,7 @@ a {
 /*Contacto*/
 #contactoContenedor {
   background-color: var(--c-blanco-suave);
-  width: 100%;  
+  width: 100%;
 }
 
 #contacto {
@@ -508,7 +343,8 @@ a {
   flex-direction: column;
   text-align: center;
   font-family: var(--family-like);
-  & > h4 {
+
+  &>h4 {
     font-weight: 1000;
   }
 }
@@ -527,6 +363,7 @@ a {
   align-items: center;
   justify-content: center;
   gap: .5rem;
+
   & svg {
     font-size: 1.5rem;
   }
@@ -541,7 +378,7 @@ a {
 }
 
 .hr {
-  background-image: linear-gradient(to right, transparent, var(--c-gris-1),transparent);
+  background-image: linear-gradient(to right, transparent, var(--c-gris-1), transparent);
   height: 0.175rem;
   border: 0;
 }
@@ -581,16 +418,19 @@ footer {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  & > div:nth-of-type(1) {
-    & > span {
+
+  &>div:nth-of-type(1) {
+    &>span {
       cursor: pointer;
-      & > a {
-      color: purple;
-      font-weight: 500;
-      text-decoration: underline;
-      &:hover {
-        color: black
-      }
+
+      &>a {
+        color: purple;
+        font-weight: 500;
+        text-decoration: underline;
+
+        &:hover {
+          color: black
+        }
       }
     }
   }
@@ -607,7 +447,8 @@ footer {
   top: 0;
 }
 
-.close:hover, .close:focus {
+.close:hover,
+.close:focus {
   color: var(--c-mainHigh);
   text-decoration: none;
   cursor: pointer;
@@ -619,12 +460,15 @@ footer {
   width: 300px;
 }
 
-#login, #loginEmail, #loginContrasena {
+#login,
+#loginEmail,
+#loginContrasena {
   display: flex;
   flex-direction: column;
 }
 
-#loginEmail > input, #loginContrasena > input {
+#loginEmail>input,
+#loginContrasena>input {
   border-radius: .2rem;
   border: 1px solid var(--c-gris-1);
   padding: .2rem
@@ -632,11 +476,13 @@ footer {
 
 #loginContrasena {
   position: relative;
-  & > div {
+
+  &>div {
     position: absolute;
     right: 5px;
     bottom: 2.5px;
-    & > svg {
+
+    &>svg {
       height: 25px;
       width: 25px;
       color: var(--c-morado-claro);
@@ -644,7 +490,7 @@ footer {
   }
 }
 
-#login > button {
+#login>button {
   margin: 1rem auto;
   padding: .5rem 2rem;
   border-radius: .2rem;
@@ -664,7 +510,8 @@ footer {
   justify-content: center;
   width: 100%;
   height: 100vh;
-  & > button {
+
+  &>button {
     border: none;
     text-decoration: underline;
     color: mediumorchid;
@@ -699,7 +546,7 @@ footer {
 
 .visto-bueno::after {
   right: 2rem;
-  transform: translate(-47.4%,60%) rotate(-45deg);
+  transform: translate(-47.4%, 60%) rotate(-45deg);
 }
 
 .visto-bueno::after {
@@ -718,104 +565,28 @@ footer {
 }
 
 @media (max-width: 917px) {
-  .detalles > div {
-    & :first-of-type, & :nth-of-type(2){
+  .detalles>div {
+
+    & :first-of-type,
+    & :nth-of-type(2) {
       flex: none;
       flex-wrap: wrap;
     }
-    
+
   }
 }
+
 @media (max-width: 809px) {
 
   .detalles {
-    
+
     display: flex;
     flex-direction: column;
-    & > div:nth-of-type(2) {
+
+    &>div:nth-of-type(2) {
       margin: 0 3rem;
-      
-    }
-  
-  }
-}
 
-@media (max-width: 750px) {
-  #nav.navLive {
-    display: block;
-  }
-  #nav.navDead {
-    display: none
-  }
+    }
 
-    #nav {            
-      border: none;
-      height: 0;
-      & > ul {
-      position: absolute;
-      padding-top: 4.2rem;
-      background-color: var(--c-blanco-suave);
-      display: flex;
-      align-items: flex-start;      
-      flex-direction: column;      
-      width: 100%;      
-      & > li:first-of-type {        
-        display: none;
-      }
-      & > li:nth-of-type(2) {
-        width: 100%;
-      }
-      
-      & > div {
-        width: 100%;
-        padding: 0 3rem;
-        & > input {
-          width: 100%;
-        }
-      }
-      & > ul {
-        width: 100%;
-        display: flex;
-        justify-content: space-around;
-        & > li {
-          border: none
-        }
-      }
-    }
-    & > ul > li:nth-of-type(2) > ul {
-      display: flex;
-      width: 100%;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0;          
-    }
-    & > ul > li:nth-of-type(2) > ul > li {
-      width: 100%;           
-      & > a {
-        display: block;
-        width: 100%;
-        padding: .5rem 3rem;
-      }
-      & > a:hover {
-        border: none;
-        background-color: var(--c-dorado-fino);
-      }
-    }
-    & > div {
-      top: 15rem;
-    }
-  }
-
-  .toggleButton {
-    display: flex;
-    position: fixed;
-    padding: .6rem 1rem;
-    border-radius: .2rem;
-    top: 1.5rem;
-    left: 1.5rem;
-    z-index: 999;
-    background-color: var(--c-celeste);
-    color: var(--c-blanco-suave);
-    border: none;
   }
 }

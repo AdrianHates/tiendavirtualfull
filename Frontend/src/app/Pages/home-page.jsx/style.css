@@ -1,0 +1,18 @@
+#homepage {
+  padding-top: 1rem;
+  width: 100%;
+  .ofertas {
+    padding: 25px 0;
+    & img {
+      width: 100%;
+    };
+  }
+}
+
+@media (max-width:640px) {
+  #homepage {
+    .ofertas {
+      padding: 5px 0;
+    }
+  }
+}

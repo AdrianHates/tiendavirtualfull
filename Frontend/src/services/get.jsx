@@ -1,4 +1,4 @@
-import { backendURL } from "../Componentes/Componentes/Variables";
+import { backendURL } from "../components/Variables";
 
 export async function getDataProductos () {
   const response = await fetch(`${backendURL}/api/get/products`)
